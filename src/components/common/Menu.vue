@@ -10,7 +10,7 @@
           <WeatherStationSelect
             name="weather-station-select"
             class="site-title select-weatherstation"
-            :value="state.weatherStationReference"
+            :value="weatherStationReference"
             />
         </div>
       </div>
@@ -44,10 +44,10 @@
 import {ROUTES} from "@/common/constant.ts";
 import {useRoute} from "vue-router";
 import WeatherStationSelect from "@/components/common/form/select/WeatherStationSelect.vue";
-import {useWeatherStation} from "@/stores/weatherStation.ts";
+import {useWeatherStationStore} from "@/stores/weatherStation.ts";
 
 const route = useRoute();
-const {state} = useWeatherStation();
+const {weatherStationReference} = useWeatherStationStore();
 
 const menuItems = [
   { name: ROUTES.HOME, label: "Accueil" },

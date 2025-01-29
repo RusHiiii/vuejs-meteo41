@@ -59,15 +59,13 @@
 <script setup lang="ts">
 import {useQuery} from "@tanstack/vue-query";
 import {fetchSummaryWeatherData} from "@/common/api/weatherDataApi.ts";
-import {useWeatherStation} from "@/stores/weatherStation.ts";
+import {useWeatherStationReference, useWeatherStationStore} from "@/stores/weatherStation.ts";
 import {computed, reactive, watch} from "vue";
 import {showFixedValue} from "@/utils/weatherData/showFixedValue.ts";
 import Date from "@/components/common/Date.vue";
 import {degToCompass} from "@/utils/weatherData/degToCompass.ts";
 
-const {state} = useWeatherStation();
-
-const weatherStationReference = computed(() => state.weatherStationReference);
+const weatherStationReference = useWeatherStationReference();
 
 const {data: weatherDataSummary} = useQuery({
   queryKey: ['weather_data_summary', {reference: weatherStationReference}],

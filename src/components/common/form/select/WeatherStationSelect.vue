@@ -15,7 +15,7 @@
 
 import {useQuery} from "@tanstack/vue-query";
 import {fetchWeatherStations} from "@/common/api/weatherStationApi.ts";
-import {useWeatherStation} from "@/stores/weatherStation.ts";
+import {useWeatherStationStore} from "@/stores/weatherStation.ts";
 
 const props = defineProps<{
   class: string | null,
@@ -23,7 +23,7 @@ const props = defineProps<{
   name: string | null
 }>();
 
-const {state, switchWeatherStationReference} = useWeatherStation();
+const {state, switchWeatherStationReference} = useWeatherStationStore();
 
 const {data: weatherStations} = useQuery({
   queryKey: ['main_weather_stations'],

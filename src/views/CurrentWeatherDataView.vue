@@ -42,8 +42,25 @@ import {ROUTES} from "@/common/constant.ts";
 import BreadCrumb from "@/components/common/BreadCrumb.vue";
 import WeatherDataAccess from "@/components/common/weatherData/WeatherDataAccess.vue";
 import WeatherDataSummary from "@/components/common/weatherData/WeatherDataSummary.vue";
-import {fetchWeatherStations} from "@/common/api/weatherStationApi.ts";
+import {
+  fetchLastWeatherStationObservation
+} from "@/common/api/weatherStationApi.ts";
 import {useQuery} from "@tanstack/vue-query";
-import {fetchSummaryWeatherData} from "@/common/api/weatherDataApi.ts";
+import {fetchDetailWeatherData} from "@/common/api/weatherDataApi.ts";
+import {useWeatherStationReference} from "@/stores/weatherStation.ts";
+
+const weatherStationReference = useWeatherStationReference();
+
+const {data: weatherDataDetail} = useQuery({
+  queryKey: ['weather_data_detail', {reference: weatherStationReference}],
+  queryFn: () => fetchDetailWeatherData(weatherStationReference.value),
+  refetchInterval: 60000
+});
+
+const {data: weatherStationObservation} = useQuery({
+  queryKey: ['weather_data_observation', {reference: weatherStationReference}],
+  queryFn: () => fetchLastWeatherStationObservation(weatherStationReference.value),
+  retry: false
+});
 
 </script>
