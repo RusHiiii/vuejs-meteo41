@@ -2,29 +2,32 @@
 
 Projet de refonte du front de mon site de météo ([meteo41.fr](https://www.meteo41.fr)) en VueJS.
 
-Initialement le back est en Symfony + React.
+❗ Le projet nécessite l'API du site de base pour fonctionner. Le repository de base est accessible [ici](https://github.com/RusHiiii/meteo41).
 
-Le repository de base est accessible [ici](https://github.com/RusHiiii/meteo41).
+## Technologies
 
-## Project Setup
+- VuesJS 3
+- Typescript
+
+## Installation
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### En mode de développement
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### Build de production
 
 ```sh
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### Linter
 
 ```sh
 npm run lint
