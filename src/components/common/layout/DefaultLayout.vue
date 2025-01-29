@@ -4,18 +4,18 @@
 
     <slot></slot>
 
-    <News/>
+    <NewsCard/>
 
-    <Informations/>
+    <AdditionalInformations/>
 
-    <Footer/>
+    <CopyrightFooter/>
   </div>
 </template>
 
 <script setup lang="ts">
-import Menu from "@/components/common/Menu.vue";
-import Footer from "@/components/common/Footer.vue";
-import News from "@/components/common/News.vue";
-import Informations from "@/components/common/Informations.vue";
+import Menu from "@/components/common/MainMenu.vue";
+import NewsCard from "@/components/common/NewsCard.vue";
+import AdditionalInformations from "@/components/common/AdditionalInformations.vue";
+import CopyrightFooter from "@/components/common/CopyrightFooter.vue";
 
 </script>

@@ -1,5 +1,4 @@
 import apiClient from "@/common/api/apiClient.ts";
-import type {SummaryWeatherData} from "@/common/types/WeatherData.tsx";
 import type {WeatherStation, WeatherStationSearchResult} from "@/common/types/WeatherStation.tsx";
 import type {Observation} from "@/common/types/Observation.tsx";
 

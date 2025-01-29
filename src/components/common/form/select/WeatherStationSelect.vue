@@ -5,7 +5,7 @@
     :name="props.name"
     @change="handleChange"
   >
-    <option v-for="weatherStation in weatherStations.weatherStations" :value="weatherStation.reference">
+    <option :key="weatherStation.id" v-for="weatherStation in weatherStations.weatherStations" :value="weatherStation.reference">
       {{weatherStation.city}} ({{weatherStation.postalCode}})
     </option>
   </select>
@@ -23,7 +23,7 @@ const props = defineProps<{
   name: string | null
 }>();
 
-const {state, switchWeatherStationReference} = useWeatherStationStore();
+const weatherStationStore = useWeatherStationStore();
 
 const {data: weatherStations} = useQuery({
   queryKey: ['main_weather_stations'],
@@ -34,7 +34,7 @@ const {data: weatherStations} = useQuery({
 function handleChange(evt: Event) {
   const target = evt.target as HTMLSelectElement;
 
-  switchWeatherStationReference(target.value);
+  weatherStationStore.switchWeatherStationReference(target.value);
 }
 
 </script>

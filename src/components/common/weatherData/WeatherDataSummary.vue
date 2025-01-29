@@ -49,7 +49,7 @@
           </div>
         </li>
         <li class="text-align-right">
-          Mise à jour à <Date :date="weatherDataSummary?.receivedAt" format="LT" />
+          Mise à jour à <DateHelper :date="weatherDataSummary?.receivedAt" format="LT" />
         </li>
       </ul>
     </div>
@@ -59,11 +59,11 @@
 <script setup lang="ts">
 import {useQuery} from "@tanstack/vue-query";
 import {fetchSummaryWeatherData} from "@/common/api/weatherDataApi.ts";
-import {useWeatherStationReference, useWeatherStationStore} from "@/stores/weatherStation.ts";
-import {computed, reactive, watch} from "vue";
+import {useWeatherStationReference} from "@/stores/weatherStation.ts";
+import {computed} from "vue";
 import {showFixedValue} from "@/utils/weatherData/showFixedValue.ts";
-import Date from "@/components/common/Date.vue";
 import {degToCompass} from "@/utils/weatherData/degToCompass.ts";
+import DateHelper from "@/components/common/DateHelper.vue";
 
 const weatherStationReference = useWeatherStationReference();
 

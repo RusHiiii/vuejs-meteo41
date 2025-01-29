@@ -4,10 +4,10 @@
       <router-link :to="{ name: ROUTES.HOME }">
         Accueil
       </router-link>
-      <router-link :to="{ name: url }">
-        {{ page }}
+      <router-link :to="{ name: props.url }">
+        {{ props.page }}
       </router-link>
-      <span>{{ text }}</span>
+      <span>{{ props.text }}</span>
     </div>
   </div>
 </template>
