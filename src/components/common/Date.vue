@@ -1,10 +1,11 @@
 <template>
-  <div>{{ formatedDate }}</div>
+  {{ formatedDate }}
 </template>
 
 <script setup lang="ts">
 import {computed} from "vue";
 import moment from "moment";
+import 'moment/dist/locale/fr.js';
 
 const {date, format} = defineProps<{ format?: string; date?: string }>();
 
