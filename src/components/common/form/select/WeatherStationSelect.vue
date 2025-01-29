@@ -6,7 +6,7 @@
     @change="handleChange"
   >
     <option :key="weatherStation.id" v-for="weatherStation in weatherStations.weatherStations" :value="weatherStation.reference">
-      {{weatherStation.city}} ({{weatherStation.postalCode}})
+      {{weatherStation.city}} ({{weatherStation.postalCode.substring(0, 2)}})
     </option>
   </select>
 </template>
