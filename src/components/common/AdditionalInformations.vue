@@ -7,7 +7,7 @@
           <ul class="arrow-feature">
             <li>
               <h3>La station météo</h3>
-              <p>Imlémenter la weather station</p>
+              <p>{{weatherStation?.shortDescription}}</p>
             </li>
             <li>
               <h3>Utilisation des données</h3>
@@ -87,4 +87,16 @@
 
 <script setup lang="ts">
 import {ROUTES} from "@/common/constant.ts";
+import {
+  fetchWeatherStation
+} from "@/common/api/weatherStationApi.ts";
+import {useWeatherStationReference} from "@/stores/weatherStation.ts";
+import {useQuery} from "@tanstack/vue-query";
+
+const weatherStationReference = useWeatherStationReference();
+
+const {data: weatherStation} = useQuery({
+  queryKey: ['weather_station', {reference: weatherStationReference}],
+  queryFn: () => fetchWeatherStation(weatherStationReference.value)
+});
 </script>
