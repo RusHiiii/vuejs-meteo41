@@ -1,6 +1,6 @@
 import apiClient from "@/common/api/apiClient.ts";
 import queryString from 'qs';
-import type {Search} from "@/common/types/search.tsx";
+import type {Search} from "@/common/types/Search.tsx";
 import type {Post, PostSearchResult} from "@/common/types/Posts.tsx";
 
 export async function fetchPosts(search: Search): Promise<PostSearchResult> {

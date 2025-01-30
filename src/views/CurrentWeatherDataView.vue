@@ -22,7 +22,20 @@
               </div>
 
               <div class="entry-content min-height-entry">
+                <div v-if="isWeatherDataErrored" class="primary-alert">
+                  Impossible de charger les données de la stations...
+                </div>
 
+                <div v-if="isWeatherDataFetched">
+                  <p>
+                    {{weatherDataDetail.weatherStation.shortDescription}}
+                  </p>
+
+                  <CurrentWeatherDataTable
+                    :observation="weatherStationObservation"
+                    :weatherData="weatherDataDetail"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -48,19 +61,22 @@ import {
 import {useQuery} from "@tanstack/vue-query";
 import {fetchDetailWeatherData} from "@/common/api/weatherDataApi.ts";
 import {useWeatherStationReference} from "@/stores/weatherStation.ts";
+import CurrentWeatherDataTable from "@/components/weatherData/CurrentWeatherDataTable.vue";
 
 const weatherStationReference = useWeatherStationReference();
 
-const {data: weatherDataDetail} = useQuery({
+const {data: weatherDataDetail, isError: isWeatherDataErrored, isFetched: isWeatherDataFetched} = useQuery({
   queryKey: ['weather_data_detail', {reference: weatherStationReference}],
   queryFn: () => fetchDetailWeatherData(weatherStationReference.value),
-  refetchInterval: 60000
+  refetchInterval: 60000,
+  retry: false
 });
 
 const {data: weatherStationObservation} = useQuery({
   queryKey: ['weather_data_observation', {reference: weatherStationReference}],
   queryFn: () => fetchLastWeatherStationObservation(weatherStationReference.value),
-  retry: false
+  retry: false,
+  initialData: null
 });
 
 </script>

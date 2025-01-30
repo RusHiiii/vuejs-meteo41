@@ -1,6 +1,7 @@
 import {ref} from 'vue'
 import {defineStore, storeToRefs} from 'pinia'
 import {DEFAULT_WEATHER_STATION} from "@/common/constant.ts";
+import type { Ref } from 'vue'
 
 export const useWeatherStationStore = defineStore('weatherStation', () => {
   const weatherStationReference = ref<string>(
@@ -14,7 +15,7 @@ export const useWeatherStationStore = defineStore('weatherStation', () => {
   return { weatherStationReference, switchWeatherStationReference }
 })
 
-export const useWeatherStationReference = () => {
+export const useWeatherStationReference = () : Ref<string> => {
   const store = useWeatherStationStore();
   const { weatherStationReference } = storeToRefs(store); // Ensures reactivity
 
