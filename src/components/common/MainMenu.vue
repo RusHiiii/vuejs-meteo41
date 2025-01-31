@@ -2,7 +2,7 @@
   <div class="site-header">
     <div class="container">
       <div class="branding">
-        <router-link :to="{ name: 'home' }">
+        <router-link :to="{ name: ROUTES.HOME }">
           <img src="/static/images/logo.png" alt="" class="logo" />
         </router-link>
         <div class="logo-type">
@@ -24,12 +24,38 @@
       <div id="custom-menu" class="main-navigation main-navigation-menu">
         <ul class="menu">
           <li
-            v-for="item in menuItems"
-            :key="item.name"
-            :class="['menu-item', route.name === item.name ? 'current-menu-item' : '']"
+            :class="['menu-item', route.name === ROUTES.HOME ? 'current-menu-item' : '']"
           >
-            <router-link :to="{ name: item.name }">
-              {{ item.label }}
+            <router-link :to="{ name: ROUTES.HOME }">
+              Accueil
+            </router-link>
+          </li>
+          <li
+            :class="['menu-item', [ROUTES.CURRENT_WEATHER_DATA, ROUTES.PERIOD_WEATHER_DATA].includes(route.name as string) ? 'current-menu-item' : '']"
+          >
+            <router-link :to="{ name: ROUTES.CURRENT_WEATHER_DATA }">
+              Données
+            </router-link>
+          </li>
+          <li
+            :class="['menu-item', route.name === ROUTES.PERIOD_GRAPHIC ? 'current-menu-item' : '']"
+          >
+            <router-link :to="{ name: ROUTES.PERIOD_GRAPHIC }">
+              Graphiques
+            </router-link>
+          </li>
+          <li
+            :class="['menu-item', route.name === ROUTES.ABOUT ? 'current-menu-item' : '']"
+          >
+            <router-link :to="{ name: ROUTES.ABOUT }">
+              À propos
+            </router-link>
+          </li>
+          <li
+            :class="['menu-item', route.name === ROUTES.CONTACT ? 'current-menu-item' : '']"
+          >
+            <router-link :to="{ name: ROUTES.CONTACT }">
+              Contact
             </router-link>
           </li>
         </ul>
@@ -45,16 +71,8 @@ import {ROUTES} from "@/common/constant.ts";
 import {useRoute} from "vue-router";
 import WeatherStationSelect from "@/components/common/form/select/WeatherStationSelect.vue";
 import {useWeatherStationStore} from "@/stores/weatherStation.ts";
+import {computed} from "vue";
 
 const route = useRoute();
 const {weatherStationReference} = useWeatherStationStore();
-
-const menuItems = [
-  { name: ROUTES.HOME, label: "Accueil" },
-  { name: ROUTES.CURRENT_WEATHER_DATA, label: "Données" },
-  { name: ROUTES.PERIOD_GRAPHIC, label: "Graphiques" },
-  { name: ROUTES.ABOUT, label: "À propos" },
-  { name: ROUTES.CONTACT, label: "Contact" },
-];
-
 </script>

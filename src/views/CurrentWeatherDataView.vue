@@ -1,7 +1,7 @@
 <template>
   <BreadCrumb
     :url="ROUTES.CURRENT_WEATHER_DATA"
-    text="Donnée courrante"
+    text="Donnée courante"
     page="Données"
   />
 

@@ -4,6 +4,12 @@ import {ROUTES} from "@/common/constant.ts";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to, from, savedPosition) {
+    return {
+      top: 0,
+      behavior: 'smooth'
+    }
+  },
   routes: [
     {
       path: '/',

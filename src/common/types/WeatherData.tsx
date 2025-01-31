@@ -13,6 +13,73 @@ export interface SummaryWeatherData {
     windSpeedAvg: number;
 }
 
+export interface HistoryWeatherData {
+  avgAqi: number;
+  avgPm25: number;
+  lightningNumber: number;
+  maxAqi: number;
+  maxAqiReceivedAt: string;
+  maxBeaufortScale: number;
+  maxBeaufortScaleReceivedAt: string;
+  maxDewPoint: number;
+  maxDewPointReceivedAt: string;
+  maxHeatIndex: number;
+  maxHeatIndexReceivedAt: string;
+  maxHumidex: number;
+  maxHumidexReceivedAt: string;
+  maxHumidity: number;
+  maxHumidityReceivedAt: string;
+  maxLeafWetness: number;
+  maxLeafWetnessReceivedAt: string;
+  maxLightningDistance: number;
+  maxLightningDistanceReceivedAt: string;
+  maxPm25: number;
+  maxPm25ReceivedAt: string;
+  maxRainEvent: number;
+  maxRainEventReceivedAt: string;
+  maxRainRate: number;
+  maxRainRateReceivedAt: string;
+  maxRelativePressure: number;
+  maxRelativePressureReceivedAt: string;
+  maxSoilTemperature: number;
+  maxSoilTemperatureReceivedAt: string;
+  maxSolarRadiation: number;
+  maxSolarRadiationReceivedAt: string;
+  maxTemperature: number;
+  maxTemperatureReceivedAt: string;
+  maxUv: number;
+  maxUvReceivedAt: string;
+  maxWindChill: number;
+  maxWindChillReceivedAt: string;
+  maxWindGust: number;
+  maxWindGustReceivedAt: string;
+  minAqi: number;
+  minAqiReceivedAt: string;
+  minDewPoint: number;
+  minDewPointReceivedAt: string;
+  minHeatIndex: number;
+  minHeatIndexReceivedAt: string;
+  minHumidex: number;
+  minHumidexReceivedAt: string;
+  minHumidity: number;
+  minHumidityReceivedAt: string;
+  minLightningDistance: number;
+  minLightningDistanceReceivedAt: string;
+  minPm25: number;
+  minPm25ReceivedAt: string;
+  minRelativePressure: number;
+  minRelativePressureReceivedAt: string;
+  minSoilTemperature: number;
+  minSoilTemperatureReceivedAt: string;
+  minTemperature: number;
+  minTemperatureReceivedAt: string;
+  minWindChill: number;
+  minWindChillReceivedAt: string;
+  rainPeriod: number;
+  unit: Unit;
+  weatherStation: WeatherStation;
+}
+
 export interface DetailWeatherData {
   absolutePressure: number;
   aqi: number;
