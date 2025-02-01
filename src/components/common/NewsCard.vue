@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import {useQuery} from "@tanstack/vue-query";
-import {fetchPosts} from "@/common/api/postApi.ts";
+import {fetchPosts} from "@/core/api/postApi.ts";
 import DateHelper from "@/components/common/DateHelper.vue";
 
 const {data: posts, isLoading: isPostLoading} = useQuery({

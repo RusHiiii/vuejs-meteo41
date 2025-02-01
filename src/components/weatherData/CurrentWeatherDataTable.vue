@@ -259,8 +259,8 @@
 </template>
 
 <script setup lang="ts">
-import type {DetailWeatherData} from "@/common/types/WeatherData.tsx";
-import type {Observation} from "@/common/types/Observation.tsx";
+import type {DetailWeatherData} from "@/core/types/WeatherData.tsx";
+import type {Observation} from "@/core/types/Observation.tsx";
 import DateHelper from "@/components/common/DateHelper.vue";
 import {computed} from "vue";
 import {showVariation} from "@/utils/weatherData/showVariation.ts";

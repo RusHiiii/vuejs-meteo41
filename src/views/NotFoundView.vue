@@ -21,5 +21,5 @@
 </template>
 <script setup lang="ts">
 import BreadCrumb from "@/components/common/BreadCrumb.vue";
-import {ROUTES} from "@/common/constant.ts";
+import {ROUTES} from "@/core/constant.ts";
 </script>

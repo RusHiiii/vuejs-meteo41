@@ -1,7 +1,7 @@
-import apiClient from "@/common/api/apiClient.ts";
+import apiClient from "@/core/api/apiClient.ts";
 import queryString from 'qs';
-import type {Search} from "@/common/types/Search.tsx";
-import type {Post, PostSearchResult} from "@/common/types/Posts.tsx";
+import type {Search} from "@/core/types/Search.tsx";
+import type {Post, PostSearchResult} from "@/core/types/Posts.tsx";
 
 export async function fetchPosts(search: Search): Promise<PostSearchResult> {
   return await apiClient(`/api/post?${queryString.stringify(search)}`, {

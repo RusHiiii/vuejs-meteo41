@@ -1,5 +1,5 @@
-import type {Unit} from "@/common/types/Unit.tsx";
-import type {WeatherStation} from "@/common/types/WeatherStation.tsx";
+import type {Unit} from "@/core/types/Unit.tsx";
+import type {WeatherStation} from "@/core/types/WeatherStation.tsx";
 
 export interface SummaryWeatherData {
     humidity: number;

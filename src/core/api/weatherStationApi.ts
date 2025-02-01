@@ -1,6 +1,6 @@
-import apiClient from "@/common/api/apiClient.ts";
-import type {WeatherStation, WeatherStationSearchResult} from "@/common/types/WeatherStation.tsx";
-import type {Observation} from "@/common/types/Observation.tsx";
+import apiClient from "@/core/api/apiClient.ts";
+import type {WeatherStation, WeatherStationSearchResult} from "@/core/types/WeatherStation.tsx";
+import type {Observation} from "@/core/types/Observation.tsx";
 
 export async function fetchWeatherStations(): Promise<WeatherStationSearchResult> {
   return await apiClient(`/api/weatherStation`, {

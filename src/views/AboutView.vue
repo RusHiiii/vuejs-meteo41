@@ -101,7 +101,7 @@ import BreadCrumb from "@/components/common/BreadCrumb.vue";
 import DateHelper from "@/components/common/DateHelper.vue";
 import {useWeatherStationReference} from "@/stores/weatherStation.ts";
 import {useQuery} from "@tanstack/vue-query";
-import {fetchWeatherStation} from "@/common/api/weatherStationApi.ts";
+import {fetchWeatherStation} from "@/core/api/weatherStationApi.ts";
 
 const weatherStationReference = useWeatherStationReference();
 

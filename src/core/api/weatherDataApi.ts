@@ -1,9 +1,9 @@
-import apiClient from "@/common/api/apiClient.ts";
+import apiClient from "@/core/api/apiClient.ts";
 import type {
   DetailWeatherData,
   HistoryWeatherData,
   SummaryWeatherData
-} from "@/common/types/WeatherData.tsx";
+} from "@/core/types/WeatherData.tsx";
 
 export async function fetchSummaryWeatherData(reference: string): Promise<SummaryWeatherData> {
   return await apiClient(`/api/weatherData/${reference}/currentData/summary`, {

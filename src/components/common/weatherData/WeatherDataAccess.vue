@@ -37,5 +37,5 @@
 </template>
 
 <script setup lang="ts">
-import {AVAILABLE_PERIOD, ROUTES} from "@/common/constant.ts";
+import {AVAILABLE_PERIOD, ROUTES} from "@/core/constant.ts";
 </script>

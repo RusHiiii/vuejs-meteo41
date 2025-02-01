@@ -51,15 +51,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import {ROUTES} from "@/common/constant.ts";
+import {ROUTES} from "@/core/constant.ts";
 import BreadCrumb from "@/components/common/BreadCrumb.vue";
 import WeatherDataAccess from "@/components/common/weatherData/WeatherDataAccess.vue";
 import WeatherDataSummary from "@/components/common/weatherData/WeatherDataSummary.vue";
 import {
   fetchLastWeatherStationObservation
-} from "@/common/api/weatherStationApi.ts";
+} from "@/core/api/weatherStationApi.ts";
 import {useQuery} from "@tanstack/vue-query";
-import {fetchDetailWeatherData} from "@/common/api/weatherDataApi.ts";
+import {fetchDetailWeatherData} from "@/core/api/weatherDataApi.ts";
 import {useWeatherStationReference} from "@/stores/weatherStation.ts";
 import CurrentWeatherDataTable from "@/components/weatherData/CurrentWeatherDataTable.vue";
 

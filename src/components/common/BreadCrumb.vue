@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import {ROUTES} from "@/common/constant.ts";
+import {ROUTES} from "@/core/constant.ts";
 
 const props = defineProps<{
   url?: string | null,

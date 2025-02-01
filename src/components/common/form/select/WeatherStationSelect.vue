@@ -14,7 +14,7 @@
 <script setup lang="ts">
 
 import {useQuery} from "@tanstack/vue-query";
-import {fetchWeatherStations} from "@/common/api/weatherStationApi.ts";
+import {fetchWeatherStations} from "@/core/api/weatherStationApi.ts";
 import {useWeatherStationStore} from "@/stores/weatherStation.ts";
 
 const props = defineProps<{

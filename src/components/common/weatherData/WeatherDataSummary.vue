@@ -58,7 +58,7 @@
 
 <script setup lang="ts">
 import {useQuery} from "@tanstack/vue-query";
-import {fetchSummaryWeatherData} from "@/common/api/weatherDataApi.ts";
+import {fetchSummaryWeatherData} from "@/core/api/weatherDataApi.ts";
 import {useWeatherStationReference} from "@/stores/weatherStation.ts";
 import {computed} from "vue";
 import {showFixedValue} from "@/utils/weatherData/showFixedValue.ts";

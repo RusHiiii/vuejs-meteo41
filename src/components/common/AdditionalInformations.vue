@@ -86,10 +86,10 @@
 </template>
 
 <script setup lang="ts">
-import {AVAILABLE_PERIOD, ROUTES} from "@/common/constant.ts";
+import {AVAILABLE_PERIOD, ROUTES} from "@/core/constant.ts";
 import {
   fetchWeatherStation
-} from "@/common/api/weatherStationApi.ts";
+} from "@/core/api/weatherStationApi.ts";
 import {useWeatherStationReference} from "@/stores/weatherStation.ts";
 import {useQuery} from "@tanstack/vue-query";
 

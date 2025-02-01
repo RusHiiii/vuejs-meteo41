@@ -1,6 +1,6 @@
 import {ref} from 'vue'
 import {defineStore, storeToRefs} from 'pinia'
-import {DEFAULT_WEATHER_STATION} from "@/common/constant.ts";
+import {DEFAULT_WEATHER_STATION} from "@/core/constant.ts";
 import type { Ref } from 'vue'
 
 export const useWeatherStationStore = defineStore('weatherStation', () => {

@@ -387,7 +387,7 @@
 </template>
 
 <script setup lang="ts">
-import type {HistoryWeatherData} from "@/common/types/WeatherData.tsx";
+import type {HistoryWeatherData} from "@/core/types/WeatherData.tsx";
 import DateHelper from "@/components/common/DateHelper.vue";
 import {computed} from "vue";
 import {beaufortScaleToText} from "@/utils/weatherData/beaufortScaleToText.ts";

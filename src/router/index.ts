@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import {registerLayout} from "@/layouts/register.ts";
-import {ROUTES} from "@/common/constant.ts";
+import {ROUTES} from "@/core/constant.ts";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
