@@ -1,4 +1,4 @@
-const apiClient = (input: RequestInfo, init?: RequestInit): any => {
+const apiClient = (input: RequestInfo, init?: RequestInit) => {
 
   return fetch(`${import.meta.env.VITE_BASE_URL}${input}`, { credentials : "same-origin", ...init})
     .then((response: Response) => {

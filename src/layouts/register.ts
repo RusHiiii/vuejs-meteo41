@@ -1,11 +1,8 @@
-export async function registerLayout(route) {
-  try {
-    const layout = route.meta.layout
+import type {RouteLocation} from "vue-router";
 
-    const layoutComponent = await import(`@/components/common/layout/${layout}.vue`)
-    route.meta.layoutComponent = layoutComponent.default
-  } catch (e) {
-    const layoutComponent = await import(`@/components/common/layout/DefaultLayout.vue`)
-    route.meta.layoutComponent = layoutComponent.default
-  }
+export async function registerLayout(route: RouteLocation) {
+  const layout = route.meta.layout
+
+  const layoutComponent = await import(`@/components/common/layout/${layout}.vue`)
+  route.meta.layoutComponent = layoutComponent.default
 }

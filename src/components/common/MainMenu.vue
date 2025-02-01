@@ -71,7 +71,6 @@ import {ROUTES} from "@/core/constant.ts";
 import {useRoute} from "vue-router";
 import WeatherStationSelect from "@/components/common/form/select/WeatherStationSelect.vue";
 import {useWeatherStationStore} from "@/stores/weatherStation.ts";
-import {computed} from "vue";
 
 const route = useRoute();
 const {weatherStationReference} = useWeatherStationStore();
