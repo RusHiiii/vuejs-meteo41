@@ -11,3 +11,8 @@ export type PostSearchResult = {
   numberOfResult: number;
   posts: Array<Post>
 };
+
+export type PostSearchFilter = {
+  page: number;
+  maxResult: number;
+}

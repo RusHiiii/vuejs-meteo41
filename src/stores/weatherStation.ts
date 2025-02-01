@@ -15,7 +15,7 @@ export const useWeatherStationStore = defineStore('weatherStation', () => {
   return { weatherStationReference, switchWeatherStationReference }
 })
 
-export const useWeatherStationReference = () : Ref<string> => {
+export const useCurrentWeatherStationReference = () : Ref<string> => {
   const store = useWeatherStationStore();
   const { weatherStationReference } = storeToRefs(store); // Ensures reactivity
 

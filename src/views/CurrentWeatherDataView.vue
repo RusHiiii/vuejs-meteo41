@@ -26,7 +26,7 @@
                   Impossible de charger les données de la stations...
                 </div>
 
-                <div v-if="isWeatherDataFetched">
+                <div v-if="weatherDataDetail">
                   <p>
                     {{weatherDataDetail.weatherStation.shortDescription}}
                   </p>
@@ -55,28 +55,15 @@ import {ROUTES} from "@/core/constant.ts";
 import BreadCrumb from "@/components/common/BreadCrumb.vue";
 import WeatherDataAccess from "@/components/common/weatherData/WeatherDataAccess.vue";
 import WeatherDataSummary from "@/components/common/weatherData/WeatherDataSummary.vue";
-import {
-  fetchLastWeatherStationObservation
-} from "@/core/api/weatherStationApi.ts";
-import {useQuery} from "@tanstack/vue-query";
-import {fetchDetailWeatherData} from "@/core/api/weatherDataApi.ts";
-import {useWeatherStationReference} from "@/stores/weatherStation.ts";
+import {useCurrentWeatherStationReference} from "@/stores/weatherStation.ts";
 import CurrentWeatherDataTable from "@/components/weatherData/CurrentWeatherDataTable.vue";
+import {useDetailWeatherData} from "@/hooks/weatherDataHook.ts";
+import {useObservationWeatherStation} from "@/hooks/weatherStationHook.ts";
 
-const weatherStationReference = useWeatherStationReference();
+const weatherStationReference = useCurrentWeatherStationReference();
 
-const {data: weatherDataDetail, isError: isWeatherDataErrored, isFetched: isWeatherDataFetched} = useQuery({
-  queryKey: ['weather_data_detail', {reference: weatherStationReference}],
-  queryFn: () => fetchDetailWeatherData(weatherStationReference.value),
-  refetchInterval: 60000,
-  retry: false
-});
+const {data: weatherDataDetail, isError: isWeatherDataErrored} = useDetailWeatherData(weatherStationReference);
 
-const {data: weatherStationObservation} = useQuery({
-  queryKey: ['weather_data_observation', {reference: weatherStationReference}],
-  queryFn: () => fetchLastWeatherStationObservation(weatherStationReference.value),
-  retry: false,
-  initialData: null
-});
+const {data: weatherStationObservation} = useObservationWeatherStation(weatherStationReference);
 
 </script>

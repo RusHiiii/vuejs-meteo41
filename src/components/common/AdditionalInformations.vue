@@ -87,16 +87,10 @@
 
 <script setup lang="ts">
 import {AVAILABLE_PERIOD, ROUTES} from "@/core/constant.ts";
-import {
-  fetchWeatherStation
-} from "@/core/api/weatherStationApi.ts";
-import {useWeatherStationReference} from "@/stores/weatherStation.ts";
-import {useQuery} from "@tanstack/vue-query";
+import {useCurrentWeatherStationReference} from "@/stores/weatherStation.ts";
+import {useWeatherStation} from "@/hooks/weatherStationHook.ts";
 
-const weatherStationReference = useWeatherStationReference();
+const weatherStationReference = useCurrentWeatherStationReference();
 
-const {data: weatherStation} = useQuery({
-  queryKey: ['weather_station', {reference: weatherStationReference}],
-  queryFn: () => fetchWeatherStation(weatherStationReference.value)
-});
+const {data: weatherStation} = useWeatherStation(weatherStationReference);
 </script>

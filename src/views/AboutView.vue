@@ -99,14 +99,10 @@
 <script setup lang="ts">
 import BreadCrumb from "@/components/common/BreadCrumb.vue";
 import DateHelper from "@/components/common/DateHelper.vue";
-import {useWeatherStationReference} from "@/stores/weatherStation.ts";
-import {useQuery} from "@tanstack/vue-query";
-import {fetchWeatherStation} from "@/core/api/weatherStationApi.ts";
+import {useCurrentWeatherStationReference} from "@/stores/weatherStation.ts";
+import {useWeatherStation} from "@/hooks/weatherStationHook.ts";
 
-const weatherStationReference = useWeatherStationReference();
+const weatherStationReference = useCurrentWeatherStationReference();
 
-const {data: weatherStation} = useQuery({
-  queryKey: ['weather_station', {reference: weatherStationReference}],
-  queryFn: () => fetchWeatherStation(weatherStationReference.value)
-});
+const {data: weatherStation} = useWeatherStation(weatherStationReference);
 </script>

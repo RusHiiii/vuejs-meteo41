@@ -272,7 +272,7 @@ import {aqiToText} from "@/utils/weatherData/aqiToText.ts";
 
 const props = defineProps<{
   weatherData: DetailWeatherData,
-  observation: Observation|null
+  observation: Observation|undefined
 }>()
 
 const temperatureVariation = computed(() => showVariation(props.weatherData.temperatureVariation, props.weatherData.unit.temperatureUnit))

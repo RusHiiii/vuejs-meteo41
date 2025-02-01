@@ -57,21 +57,16 @@
 </template>
 
 <script setup lang="ts">
-import {useQuery} from "@tanstack/vue-query";
-import {fetchSummaryWeatherData} from "@/core/api/weatherDataApi.ts";
-import {useWeatherStationReference} from "@/stores/weatherStation.ts";
+import {useCurrentWeatherStationReference} from "@/stores/weatherStation.ts";
 import {computed} from "vue";
 import {showFixedValue} from "@/utils/weatherData/showFixedValue.ts";
 import {degToCompass} from "@/utils/weatherData/degToCompass.ts";
 import DateHelper from "@/components/common/DateHelper.vue";
+import {useWeatherDataSummary} from "@/hooks/weatherDataHook.ts";
 
-const weatherStationReference = useWeatherStationReference();
+const weatherStationReference = useCurrentWeatherStationReference();
 
-const {data: weatherDataSummary} = useQuery({
-  queryKey: ['weather_data_summary', {reference: weatherStationReference}],
-  queryFn: () => fetchSummaryWeatherData(weatherStationReference.value),
-  refetchInterval: 60000
-});
+const {data: weatherDataSummary} = useWeatherDataSummary(weatherStationReference);
 
 const temperature = computed(() => showFixedValue(weatherDataSummary.value?.temperature));
 const relativePressure = computed(() => showFixedValue(weatherDataSummary.value?.relativePressure));

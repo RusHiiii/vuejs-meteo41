@@ -59,12 +59,11 @@ import BreadCrumb from "@/components/common/BreadCrumb.vue";
 import {AVAILABLE_PERIOD, ROUTES} from "@/core/constant.ts";
 import WeatherDataAccess from "@/components/common/weatherData/WeatherDataAccess.vue";
 import WeatherDataSummary from "@/components/common/weatherData/WeatherDataSummary.vue";
-import {useWeatherStationReference} from "@/stores/weatherStation.ts";
+import {useCurrentWeatherStationReference} from "@/stores/weatherStation.ts";
 import {useRoute} from "vue-router";
 import {computed} from "vue";
-import {fetchHistoryWeatherData} from "@/core/api/weatherDataApi.ts";
-import {useQuery} from "@tanstack/vue-query";
 import HistoryWeatherDataTable from "@/components/weatherData/HistoryWeatherDataTable.vue";
+import {useWeatherDataHistory} from "@/hooks/weatherDataHook.ts";
 
 const AVAILABLE_PERIOD_MAP: Record<string, string> = {
   [AVAILABLE_PERIOD.DAILY]: "Données de la journée",
@@ -74,16 +73,12 @@ const AVAILABLE_PERIOD_MAP: Record<string, string> = {
   [AVAILABLE_PERIOD.RECORD]: "Record de la station"
 };
 
-const weatherStationReference = useWeatherStationReference();
+const weatherStationReference = useCurrentWeatherStationReference();
 const route = useRoute();
 
 const currentPeriod = computed(() => route.params.period || AVAILABLE_PERIOD.DAILY);
 const periodName = computed(() => AVAILABLE_PERIOD_MAP[currentPeriod.value]);
 
-const {data: weatherDataHistory, isError: isWeatherDataHistoryErrored, isFetched: isWeatherDataHistoryFetched, isLoading: isWeatherDataHistoryLoading} = useQuery({
-  queryKey: ['weather_data_history', {reference: weatherStationReference, period: currentPeriod}],
-  queryFn: () => fetchHistoryWeatherData(weatherStationReference.value, currentPeriod.value as string),
-  retry: false
-});
+const {data: weatherDataHistory, isError: isWeatherDataHistoryErrored, isFetched: isWeatherDataHistoryFetched, isLoading: isWeatherDataHistoryLoading} = useWeatherDataHistory(weatherStationReference, currentPeriod);
 
 </script>

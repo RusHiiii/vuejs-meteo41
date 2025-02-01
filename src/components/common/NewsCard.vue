@@ -20,13 +20,14 @@
 </template>
 
 <script setup lang="ts">
-import {useQuery} from "@tanstack/vue-query";
-import {fetchPosts} from "@/core/api/postApi.ts";
 import DateHelper from "@/components/common/DateHelper.vue";
+import {ref} from "vue";
+import {usePosts} from "@/hooks/postHook.ts";
 
-const {data: posts, isLoading: isPostLoading} = useQuery({
-  queryKey: ['posts'],
-  queryFn: () => fetchPosts({page: 1, maxResult: 3}),
-  initialData: []
-})
+const searchFilters = ref({
+  page: 1,
+  maxResult: 3
+});
+
+const {data: posts, isLoading: isPostLoading} = usePosts(searchFilters);
 </script>

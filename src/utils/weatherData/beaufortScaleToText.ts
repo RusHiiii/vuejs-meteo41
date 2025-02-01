@@ -1,5 +1,5 @@
 export function beaufortScaleToText(value: number): string {
-  let valueToText = [
+  const valueToText = [
     'Calme',
     'Très légère brise',
     'Légère brise',

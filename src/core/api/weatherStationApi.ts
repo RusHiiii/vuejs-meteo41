@@ -3,7 +3,7 @@ import type {WeatherStation, WeatherStationSearchResult} from "@/core/types/Weat
 import type {Observation} from "@/core/types/Observation.tsx";
 
 export async function fetchWeatherStations(): Promise<WeatherStationSearchResult> {
-  return await apiClient(`/api/weatherStation`, {
+  return apiClient(`/api/weatherStation`, {
       method: 'GET'
     })
     .then((response: Response) => response.json());

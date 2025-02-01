@@ -1,4 +1,4 @@
-export function degToCompass(num: number|null): string {
+export function degToCompass(num: number|undefined): string {
   if (!num) {
     return '-';
   }
