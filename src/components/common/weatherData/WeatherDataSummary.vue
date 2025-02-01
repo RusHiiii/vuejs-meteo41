@@ -59,8 +59,8 @@
 <script setup lang="ts">
 import {useCurrentWeatherStationReference} from "@/stores/weatherStation.ts";
 import {computed} from "vue";
-import {showFixedValue} from "@/utils/weatherData/showFixedValue.ts";
-import {degToCompass} from "@/utils/weatherData/degToCompass.ts";
+import {showFixedValue} from "@/core/utils/weatherData/showFixedValue.ts";
+import {degToCompass} from "@/core/utils/weatherData/degToCompass.ts";
 import DateHelper from "@/components/common/DateHelper.vue";
 import {useWeatherDataSummary} from "@/hooks/weatherDataHook.ts";
 

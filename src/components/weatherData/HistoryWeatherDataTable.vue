@@ -390,8 +390,8 @@
 import type {HistoryWeatherData} from "@/core/types/WeatherData.tsx";
 import DateHelper from "@/components/common/DateHelper.vue";
 import {computed} from "vue";
-import {beaufortScaleToText} from "@/utils/weatherData/beaufortScaleToText.ts";
-import {aqiToText} from "@/utils/weatherData/aqiToText.ts";
+import {beaufortScaleToText} from "@/core/utils/weatherData/beaufortScaleToText.ts";
+import {aqiToText} from "@/core/utils/weatherData/aqiToText.ts";
 
 const props = defineProps<{
   weatherData: HistoryWeatherData,

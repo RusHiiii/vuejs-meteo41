@@ -30,7 +30,7 @@
                   Veuillez patienter
                 </p>
 
-                <div v-else-if="isWeatherDataHistoryFetched">
+                <div v-else-if="weatherDataHistory">
                   <p>
                     {{weatherDataHistory.weatherStation.shortDescription}}
                   </p>
@@ -79,6 +79,6 @@ const route = useRoute();
 const currentPeriod = computed(() => route.params.period || AVAILABLE_PERIOD.DAILY);
 const periodName = computed(() => AVAILABLE_PERIOD_MAP[currentPeriod.value]);
 
-const {data: weatherDataHistory, isError: isWeatherDataHistoryErrored, isFetched: isWeatherDataHistoryFetched, isLoading: isWeatherDataHistoryLoading} = useWeatherDataHistory(weatherStationReference, currentPeriod);
+const {data: weatherDataHistory, isError: isWeatherDataHistoryErrored, isLoading: isWeatherDataHistoryLoading} = useWeatherDataHistory(weatherStationReference, currentPeriod);
 
 </script>

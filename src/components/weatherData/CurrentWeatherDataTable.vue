@@ -263,12 +263,12 @@ import type {DetailWeatherData} from "@/core/types/WeatherData.tsx";
 import type {Observation} from "@/core/types/Observation.tsx";
 import DateHelper from "@/components/common/DateHelper.vue";
 import {computed} from "vue";
-import {showVariation} from "@/utils/weatherData/showVariation.ts";
-import {showOptionnalSensor} from "@/utils/weatherData/showOptionnalSensor.ts";
-import {showObservation} from "@/utils/weatherData/showObservation.ts";
-import {degToCompass} from "@/utils/weatherData/degToCompass.ts";
-import {beaufortScaleToText} from "@/utils/weatherData/beaufortScaleToText.ts";
-import {aqiToText} from "@/utils/weatherData/aqiToText.ts";
+import {showVariation} from "@/core/utils/weatherData/showVariation.ts";
+import {showOptionnalSensor} from "@/core/utils/weatherData/showOptionnalSensor.ts";
+import {showObservation} from "@/core/utils/weatherData/showObservation.ts";
+import {degToCompass} from "@/core/utils/weatherData/degToCompass.ts";
+import {beaufortScaleToText} from "@/core/utils/weatherData/beaufortScaleToText.ts";
+import {aqiToText} from "@/core/utils/weatherData/aqiToText.ts";
 
 const props = defineProps<{
   weatherData: DetailWeatherData,
