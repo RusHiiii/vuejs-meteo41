@@ -65,7 +65,7 @@
               href="https://app.weathercloud.net/d0599727380#profile"
             >
               <img
-                src="/static/images/weathercloud.png"
+                src="/images/weathercloud.png"
                 alt="weathercloud"
               />
             </a>
@@ -73,10 +73,10 @@
               target="_blank"
               href="https://www.wunderground.com/dashboard/pws/ISAINT1035"
             >
-              <img src="/static/images/wu.png" alt="wunderground" />
+              <img src="/images/wu.png" alt="wunderground" />
             </a>
             <a target="_blank" href="https://www.ecowitt.net/">
-              <img src="/static/images/ecowitt.png" alt="ecowitt" />
+              <img src="/images/ecowitt.png" alt="ecowitt" />
             </a>
           </div>
         </div>

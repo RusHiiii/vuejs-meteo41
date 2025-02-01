@@ -3,7 +3,7 @@
     <div class="container">
       <div class="branding">
         <router-link :to="{ name: ROUTES.HOME }">
-          <img src="/static/images/logo.png" alt="" class="logo" />
+          <img src="/images/logo.png" alt="" class="logo" />
         </router-link>
         <div class="logo-type">
           <small class="site-description">Changez de station ↓</small>

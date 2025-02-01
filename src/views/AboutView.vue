@@ -11,7 +11,7 @@
                 Informations sur la station de {{weatherStation?.city}}
               </h2>
               <div class="featured-image">
-                <img src='/static/images/chambord.png' alt="Chambord" />
+                <img src='/images/chambord.png' alt="Chambord" />
               </div>
 
               <div class="entry-content">

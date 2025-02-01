@@ -16,7 +16,7 @@
               </h2>
               <div class="featured-image">
                 <img
-                  src="/static/images/chenonceau.png"
+                  src="/images/chenonceau.png"
                   alt="Chenonceau"
                 />
               </div>
