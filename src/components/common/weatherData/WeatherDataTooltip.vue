@@ -23,8 +23,8 @@ const props = defineProps<{
   minValue: number|undefined;
   maxValue: number|undefined;
   unit: string;
-  minReceivedAt: string;
-  maxReceivedAt: string;
+  minReceivedAt: string|undefined;
+  maxReceivedAt: string|undefined;
 }>();
 
 const minValue = computed(() => showFixedValue(props.minValue));
