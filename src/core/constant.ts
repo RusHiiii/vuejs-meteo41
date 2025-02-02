@@ -28,8 +28,3 @@ export const DEFAULT_WEATHER_STATION = {
   CITY_TEXT: '41000 Saint-Sulpice, France',
   REFERENCE: 'SSDP41000'
 }
-
-
-export const PUBLIC_API_KEY = {
-  MAP: 'AIzaSyBXTerqaOjZ_27sfAA2qOIaCrn3OLWJPBI'
-}
