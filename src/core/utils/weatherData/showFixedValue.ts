@@ -1,7 +1,7 @@
 export function showFixedValue(value: number|undefined, precision: number = 1): string {
-  if (value) {
-    return value.toFixed(precision);
+  if (value === undefined || value === null) {
+    return '-';
   }
 
-  return '-';
+  return value.toFixed(precision);
 }

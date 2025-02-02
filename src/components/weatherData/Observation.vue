@@ -13,7 +13,14 @@
       <div class="temp">
         <div class="current-temp">
           <h3>
-            {{temperature}}
+            <WeatherDataTooltip
+                :currentValue="temperature"
+                :minValue="weatherDataDaily.minTemperature"
+                :maxValue="weatherDataDaily.maxTemperature"
+                :unit="weatherDataDaily.unit.temperatureUnit"
+                :minReceivedAt="weatherDataDaily.minTemperatureReceivedAt"
+                :maxReceivedAt="weatherDataDaily.maxTemperatureReceivedAt"
+            />
             <small class="celsius">
               {{weatherData.unit.temperatureUnit}}
             </small>
@@ -21,28 +28,56 @@
           <div class="windchill">
             Windchill
             <strong class="windchill-value">
-              {{windChill}}
+              <WeatherDataTooltip
+                  :currentValue="windChill"
+                  :minValue="weatherDataDaily.minWindChill"
+                  :maxValue="weatherDataDaily.maxWindChill"
+                  :unit="weatherDataDaily.unit.temperatureUnit"
+                  :minReceivedAt="weatherDataDaily.minWindChillReceivedAt"
+                  :maxReceivedAt="weatherDataDaily.maxWindChillReceivedAt"
+              />
               {{weatherData.unit.temperatureUnit}}
             </strong>
           </div>
           <div class="dewpoint">
             Point de rosée
             <strong class="dewpoint-value">
-              {{dewPoint}}
+              <WeatherDataTooltip
+                  :currentValue="dewPoint"
+                  :minValue="weatherDataDaily.minDewPoint"
+                  :maxValue="weatherDataDaily.maxDewPoint"
+                  :unit="weatherDataDaily.unit.temperatureUnit"
+                  :minReceivedAt="weatherDataDaily.minDewPointReceivedAt"
+                  :maxReceivedAt="weatherDataDaily.maxDewPointReceivedAt"
+              />
               {{weatherData.unit.temperatureUnit}}
             </strong>
           </div>
           <div class="humidex">
             Humidex
             <strong class="humidex-value">
-              {{humidex}}
+              <WeatherDataTooltip
+                  :currentValue="humidex"
+                  :minValue="weatherDataDaily.minHumidex"
+                  :maxValue="weatherDataDaily.maxHumidex"
+                  :unit="weatherDataDaily.unit.temperatureUnit"
+                  :minReceivedAt="weatherDataDaily.minHumidexReceivedAt"
+                  :maxReceivedAt="weatherDataDaily.maxHumidexReceivedAt"
+              />
               {{weatherData.unit.temperatureUnit}}
             </strong>
           </div>
           <div class="heatindex">
             Heat Index
             <strong class="heatindex-value">
-              {{heatIndex}}
+              <WeatherDataTooltip
+                  :currentValue="heatIndex"
+                  :minValue="weatherDataDaily.minHeatIndex"
+                  :maxValue="weatherDataDaily.maxHeatIndex"
+                  :unit="weatherDataDaily.unit.temperatureUnit"
+                  :minReceivedAt="weatherDataDaily.minHeatIndexReceivedAt"
+                  :maxReceivedAt="weatherDataDaily.maxHeatIndexReceivedAt"
+              />
               {{weatherData.unit.temperatureUnit}}
             </strong>
           </div>
@@ -79,7 +114,14 @@
                 </td>
                 <td class="td-value-obs">
                   <strong>
-                    {{relativePressure}}
+                    <WeatherDataTooltip
+                        :currentValue="relativePressure"
+                        :minValue="weatherDataDaily.minRelativePressure"
+                        :maxValue="weatherDataDaily.maxRelativePressure"
+                        :unit="weatherDataDaily.unit.pressureUnit"
+                        :minReceivedAt="weatherDataDaily.minRelativePressureReceivedAt"
+                        :maxReceivedAt="weatherDataDaily.maxRelativePressureReceivedAt"
+                    />
                   </strong>
                 </td>
                 <td>
@@ -93,7 +135,16 @@
                   </span>
                 </td>
                 <td class="td-value-obs">
-                  <strong>{{weatherData.humidity}}</strong>
+                  <strong>
+                    <WeatherDataTooltip
+                        :currentValue="humidity"
+                        :minValue="weatherDataDaily.minHumidity"
+                        :maxValue="weatherDataDaily.maxHumidity"
+                        :unit="weatherDataDaily.unit.humidityUnit"
+                        :minReceivedAt="weatherDataDaily.minHumidityReceivedAt"
+                        :maxReceivedAt="weatherDataDaily.maxHumidityReceivedAt"
+                    />
+                  </strong>
                 </td>
                 <td>
                   <small>{{weatherData.unit.humidityUnit}}</small>
@@ -106,7 +157,16 @@
                   </span>
                 </td>
                 <td class="td-value-obs">
-                  <strong>{{weatherData.pm25}}</strong>
+                  <strong>
+                    <WeatherDataTooltip
+                        :currentValue="pm25"
+                        :minValue="weatherDataDaily.minPm25"
+                        :maxValue="weatherDataDaily.maxPm25"
+                        :unit="weatherDataDaily.unit.pmUnit"
+                        :minReceivedAt="weatherDataDaily.minPm25ReceivedAt"
+                        :maxReceivedAt="weatherDataDaily.maxPm25ReceivedAt"
+                    />
+                  </strong>
                 </td>
                 <td>
                   <small>{{weatherData.unit.pmUnit}}</small>
@@ -119,7 +179,16 @@
                   </span>
                 </td>
                 <td class="td-value-obs">
-                  <strong>{{weatherData.lightningDaily}}</strong>
+                  <strong>
+                    <WeatherDataTooltip
+                        :currentValue="lightningDaily"
+                        :minValue="weatherDataDaily.minLightningDistance"
+                        :maxValue="weatherDataDaily.maxLightningDistance"
+                        :minReceivedAt="weatherDataDaily.minLightningDistanceReceivedAt"
+                        :maxReceivedAt="weatherDataDaily.maxLightningDistanceReceivedAt"
+                        unit="km"
+                    />
+                  </strong>
                 </td>
                 <td>
                   <small>impact(s)</small>
@@ -217,6 +286,7 @@ import {computed} from "vue";
 import { getMoonTimes, getTimes } from 'suncalc';
 import {showFixedValue} from "@/core/utils/weatherData/showFixedValue.ts";
 import {degToCompass} from "@/core/utils/weatherData/degToCompass.ts";
+import WeatherDataTooltip from "@/components/common/weatherData/WeatherDataTooltip.vue";
 
 const props = defineProps<{
   weatherData: DetailWeatherData,
@@ -229,6 +299,9 @@ const temperature = computed(() => showFixedValue(props.weatherData.temperature)
 const relativePressure = computed(() => showFixedValue(props.weatherData.relativePressure));
 const dewPoint = computed(() => showFixedValue(props.weatherData.dewPoint));
 const windChill = computed(() => showFixedValue(props.weatherData.windChill));
+const humidity = computed(() => showFixedValue(props.weatherData.humidity, 0));
+const pm25 = computed(() => showFixedValue(props.weatherData.pm25, 0));
+const lightningDaily = computed(() => showFixedValue(props.weatherData.lightningDaily, 0));
 
 const windDirectionAvg = computed(() => showFixedValue(props.weatherData.windDirection, 0));
 const windDirectionAvgDeg = computed(() => degToCompass(props.weatherData.windDirection));

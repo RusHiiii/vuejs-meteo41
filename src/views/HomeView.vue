@@ -83,6 +83,37 @@
           </div>
         </div>
       </div>
+
+      <div class="fullwidth-block">
+        <div class="container">
+          <h2 class="section-title">Capteurs au sol</h2>
+          <div class="gauge col-md-3 col-sm-6">
+            <h3>Qualité de l'air</h3>
+          </div>
+          <div class="gauge col-md-3 col-sm-6">
+            
+            <h3>Humidité foliaire</h3>
+          </div>
+          <div class="gauge col-md-3 col-sm-6">
+            
+            <h3>Température (-30cm)</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="fullwidth-block other-sensor">
+        <div class="container">
+          <h2 class="section-title">Capteurs solaires</h2>
+          <div class="gauge col-md-3 col-sm-6">
+
+            <h3>UV</h3>
+          </div>
+          <div class="gauge col-md-3 col-sm-6">
+
+            <h3>Radiation solaire</h3>
+          </div>
+        </div>
+      </div>
     </main>
   </main>
 </template>
