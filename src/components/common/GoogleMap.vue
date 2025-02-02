@@ -21,7 +21,7 @@ import { GoogleMap, CustomMarker } from 'vue3-google-map'
 
 const apiKey: string = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
-const props = defineProps<{
+defineProps<{
   lat: number;
   lng: number;
 }>();

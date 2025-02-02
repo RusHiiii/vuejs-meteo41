@@ -17,7 +17,7 @@
             <div class="forecast-table">
               <div class="forecast-container">
                 <div class="today forecast">
-                  <Observation
+                  <CurrentObservation
                       v-if="weatherDataDetail && weatherDataHistory"
                       :weatherData="weatherDataDetail"
                       :weatherDataDaily="weatherDataHistory"
@@ -120,18 +120,15 @@
 <script setup lang="ts">
 
 import {useCurrentWeatherStationReference} from "@/stores/weatherStation.ts";
-import {useWeatherStation} from "@/hooks/weatherStationHook.ts";
 import {useDetailWeatherData, useWeatherDataHistory} from "@/hooks/weatherDataHook.ts";
 import {ref} from "vue";
 import {AVAILABLE_PERIOD} from "@/core/constant.ts";
 import GoogleMap from "@/components/common/GoogleMap.vue";
-import Observation from "@/components/weatherData/Observation.vue";
+import CurrentObservation from "@/components/weatherData/CurrentObservation.vue";
 
 const historyPeriod = ref(AVAILABLE_PERIOD.DAILY);
 
 const weatherStationReference = useCurrentWeatherStationReference();
-
-const {data: weatherStation} = useWeatherStation(weatherStationReference);
 
 const {data: weatherDataDetail} = useDetailWeatherData(weatherStationReference);
 const {data: weatherDataHistory} = useWeatherDataHistory(weatherStationReference, historyPeriod);
