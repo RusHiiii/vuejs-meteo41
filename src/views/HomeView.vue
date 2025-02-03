@@ -1,15 +1,8 @@
 <template>
   <main class="main-content">
-    <div class="hero" data-bg-image="/static/images/sologne-v1.png">
-      <div class="container">
 
-      </div>
-    </div>
-    <div class="forecast-table">
-      <div class="container">
+    <WeatherForecast />
 
-      </div>
-    </div>
     <main class="main-content current-obs">
       <div class="fullwidth-block">
         <div class="container">
@@ -175,6 +168,7 @@ import LeafWetness from "@/components/gauge/LeafWetness.vue";
 import SoilTemperature from "@/components/gauge/SoilTemperature.vue";
 import Uv from "@/components/gauge/Uv.vue";
 import SolarRadiation from "@/components/gauge/SolarRadiation.vue";
+import WeatherForecast from "@/components/forecast/WeatherForecast.vue";
 
 const historyPeriod = ref(AVAILABLE_PERIOD.DAILY);
 
