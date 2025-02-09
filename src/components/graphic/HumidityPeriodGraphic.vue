@@ -9,10 +9,9 @@
 </template>
 
 <script setup lang="ts">
-import fr from 'apexcharts/dist/locales/fr.json';
 import type {HistoryWeatherData, HistoryWeatherGraphSearchResult} from "@/core/types/WeatherData.tsx";
 import {computed, ref} from "vue";
-import moment from "moment/moment";
+import {getDefaultChartOptions} from "@/core/utils/graphic/defaultGraphOptions.ts";
 
 const props = defineProps<{
   graphData: HistoryWeatherGraphSearchResult | undefined,
@@ -33,58 +32,7 @@ const chartDatas = computed(() => {
 });
 
 const chartOptions = computed(() => ({
-  colors: ['#e7bf22'],
-  chart: {
-    locales: [fr],
-    defaultLocale: 'fr',
-    type: 'line',
-    foreColor: '#fff',
-    toolbar: {
-      show: true,
-      tools: {
-        download: false,
-        pan: false,
-      },
-    },
-    zoom: {
-      enabled: true,
-      type: 'xy',
-      autoScaleYaxis: true,
-    },
-  },
-  noData: {
-    text: 'Aucune données :(',
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: 'smooth',
-    width: 2,
-  },
-  title: {
-    text: 'Humidité',
-    align: 'left',
-  },
-  grid: {
-    borderColor: '#f1f1f1',
-  },
-  xaxis: {
-    type: 'datetime',
-    min: moment(props.graphData?.dateBegin)?.unix() * 1000,
-    max: moment(props.graphData?.dateEnd)?.unix() * 1000,
-    labels: {
-      datetimeUTC: false,
-    },
-  },
-  legend: {
-    showForSingleSeries: true,
-  },
-  yaxis: {
-    min: 0,
-    max: 100,
-    forceNiceScale: true,
-  },
+  ...getDefaultChartOptions(props.graphData),
   tooltip: {
     x: {
       format: 'dd MMM HH:mm',
