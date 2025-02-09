@@ -26,34 +26,34 @@
           <h2 class="section-title weather-data">Les données météo</h2>
           <ul class="arrow-list">
             <li>
-              <router-link :to="{ name: ROUTES.PERIOD_WEATHER_DATA, params: { period: AVAILABLE_PERIOD.DAILY }}">
+              <RouterLink :to="{ name: ROUTES.PERIOD_WEATHER_DATA, params: { period: AVAILABLE_PERIOD.DAILY }}">
                 Les données de la journée
-              </router-link>
+              </RouterLink>
             </li>
             <li>
-              <router-link :to="{ name: ROUTES.PERIOD_WEATHER_DATA, params: { period: AVAILABLE_PERIOD.WEEKLY }}">
+              <RouterLink :to="{ name: ROUTES.PERIOD_WEATHER_DATA, params: { period: AVAILABLE_PERIOD.WEEKLY }}">
                 Les données de la semaine
-              </router-link>
+              </RouterLink>
             </li>
             <li>
-              <router-link :to="{ name: ROUTES.PERIOD_WEATHER_DATA, params: { period: AVAILABLE_PERIOD.MONTHLY }}">
+              <RouterLink :to="{ name: ROUTES.PERIOD_WEATHER_DATA, params: { period: AVAILABLE_PERIOD.MONTHLY }}">
                 Les données du mois
-              </router-link>
+              </RouterLink>
             </li>
             <li>
-              <router-link :to="{ name: ROUTES.PERIOD_WEATHER_DATA, params: { period: AVAILABLE_PERIOD.YEARLY }}">
+              <RouterLink :to="{ name: ROUTES.PERIOD_WEATHER_DATA, params: { period: AVAILABLE_PERIOD.YEARLY }}">
                 Les données de l'année
-              </router-link>
+              </RouterLink>
             </li>
             <li>
-              <router-link :to="{ name: ROUTES.PERIOD_WEATHER_DATA, params: { period: AVAILABLE_PERIOD.RECORD }}">
+              <RouterLink :to="{ name: ROUTES.PERIOD_WEATHER_DATA, params: { period: AVAILABLE_PERIOD.RECORD }}">
                 Les records de la station
-              </router-link>
+              </RouterLink>
             </li>
             <li>
-              <router-link :to="{ name: ROUTES.CURRENT_WEATHER_DATA }">
+              <RouterLink :to="{ name: ROUTES.CURRENT_WEATHER_DATA }">
                 Les graphiques de la station
-              </router-link>
+              </RouterLink>
             </li>
           </ul>
         </div>

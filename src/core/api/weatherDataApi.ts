@@ -1,7 +1,7 @@
 import apiClient from "@/core/api/apiClient.ts";
 import type {
   DetailWeatherData,
-  HistoryWeatherData,
+  HistoryWeatherData, HistoryWeatherGraphSearchResult,
   SummaryWeatherData
 } from "@/core/types/WeatherData.tsx";
 
@@ -24,4 +24,11 @@ export async function fetchHistoryWeatherData(reference: string, period: string)
     method: 'GET'
   })
     .then((response: Response) => response.json());
+}
+
+export async function fetchHistoryWeatherDataGraph(reference: string, period: string): Promise<HistoryWeatherGraphSearchResult> {
+  return await apiClient(`/api/weatherData/${reference}/graph/${period}`, {
+    method: 'GET'
+  })
+      .then((response: Response) => response.json());
 }

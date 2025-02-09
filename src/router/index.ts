@@ -60,6 +60,14 @@ const router = createRouter({
       }
     },
     {
+      path: "/weather/graph/:period(daily|weekly|monthly|yearly)",
+      name: ROUTES.PERIOD_GRAPHIC,
+      component: () => import('@/views/HistoryWeatherDataGraphicView.vue'),
+      meta: {
+        layout: 'DefaultLayout'
+      }
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: ROUTES.NOT_FOUND,
       component: () => import('@/views/NotFoundView.vue'),

@@ -2,9 +2,9 @@
   <div class="site-header">
     <div class="container">
       <div class="branding">
-        <router-link :to="{ name: ROUTES.HOME }">
+        <RouterLink :to="{ name: ROUTES.HOME }">
           <img src="/images/logo.png" alt="" class="logo" />
-        </router-link>
+        </RouterLink>
         <div class="logo-type">
           <small class="site-description">Changez de station ↓</small>
           <WeatherStationSelect
@@ -26,37 +26,37 @@
           <li
             :class="['menu-item', route.name === ROUTES.HOME ? 'current-menu-item' : '']"
           >
-            <router-link :to="{ name: ROUTES.HOME }">
+            <RouterLink :to="{ name: ROUTES.HOME }">
               Accueil
-            </router-link>
+            </RouterLink>
           </li>
           <li
             :class="['menu-item', [ROUTES.CURRENT_WEATHER_DATA, ROUTES.PERIOD_WEATHER_DATA].includes(route.name as string) ? 'current-menu-item' : '']"
           >
-            <router-link :to="{ name: ROUTES.CURRENT_WEATHER_DATA }">
+            <RouterLink :to="{ name: ROUTES.CURRENT_WEATHER_DATA }">
               Données
-            </router-link>
+            </RouterLink>
           </li>
           <li
             :class="['menu-item', route.name === ROUTES.PERIOD_GRAPHIC ? 'current-menu-item' : '']"
           >
-            <router-link :to="{ name: ROUTES.PERIOD_GRAPHIC }">
+            <RouterLink :to="{ name: ROUTES.PERIOD_GRAPHIC, params: {period: AVAILABLE_PERIOD.DAILY} }">
               Graphiques
-            </router-link>
+            </RouterLink>
           </li>
           <li
             :class="['menu-item', route.name === ROUTES.ABOUT ? 'current-menu-item' : '']"
           >
-            <router-link :to="{ name: ROUTES.ABOUT }">
+            <RouterLink :to="{ name: ROUTES.ABOUT }">
               À propos
-            </router-link>
+            </RouterLink>
           </li>
           <li
             :class="['menu-item', route.name === ROUTES.CONTACT ? 'current-menu-item' : '']"
           >
-            <router-link :to="{ name: ROUTES.CONTACT }">
+            <RouterLink :to="{ name: ROUTES.CONTACT }">
               Contact
-            </router-link>
+            </RouterLink>
           </li>
         </ul>
       </div>
@@ -67,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import {ROUTES} from "@/core/constant.ts";
+import {AVAILABLE_PERIOD, ROUTES} from "@/core/constant.ts";
 import {useRoute} from "vue-router";
 import WeatherStationSelect from "@/components/common/form/select/WeatherStationSelect.vue";
 import {useWeatherStationStore} from "@/stores/weatherStation.ts";

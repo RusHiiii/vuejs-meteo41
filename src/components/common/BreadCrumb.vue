@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div class="breadcrumb">
-      <router-link :to="{ name: ROUTES.HOME }">
+      <RouterLink :to="{ name: ROUTES.HOME }">
         Accueil
-      </router-link>
-      <router-link v-if="props.url" :to="{ name: props.url }">
+      </RouterLink>
+      <RouterLink v-if="props.url" :to="{ name: props.url }">
         {{ props.page }}
-      </router-link>
+      </RouterLink>
       <span>{{ props.text }}</span>
     </div>
   </div>

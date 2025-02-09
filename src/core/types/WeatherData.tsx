@@ -123,3 +123,34 @@ export interface DetailWeatherData {
   unit: Unit;
   weatherStation: WeatherStation;
 }
+
+export interface WeatherGraphData {
+  id: number;
+  aqi: number;
+  aqiAvg: number;
+  dewPoint: number;
+  humidity: number;
+  leafWetness?: number;
+  pm25?: number;
+  rainDaily: number;
+  rainRate: number;
+  receivedAt: string;
+  relativePressure: number;
+  soilTemperature?: number;
+  solarRadiation: number;
+  temperature: number;
+  uv: number;
+  windChill: number;
+  windDirection: number;
+  windGust: number;
+  windSpeed: number;
+}
+
+export interface HistoryWeatherGraphSearchResult {
+  datas: Array<WeatherGraphData>;
+  dateBegin: string;
+  dateEnd: string;
+  numberOfResult: number;
+  unit: Unit;
+  weatherStation: WeatherStation;
+}
