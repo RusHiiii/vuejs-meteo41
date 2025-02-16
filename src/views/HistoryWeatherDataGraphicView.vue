@@ -59,6 +59,12 @@
               :history="weatherDataHistory"
               :period="periodName"
             />
+
+            <SoilTemperaturePeriodGraphic
+                :graphData="weatherDataGraphHistory"
+                :history="weatherDataHistory"
+                :period="periodName"
+            />
           </div>
         </div>
       </div>
@@ -77,6 +83,7 @@ import {useObservationWeatherStation} from "@/hooks/weatherStationHook.ts";
 import {useRoute} from "vue-router";
 import {computed, ref} from "vue";
 import HumidityPeriodGraphic from "@/components/graphic/HumidityPeriodGraphic.vue";
+import SoilTemperaturePeriodGraphic from "@/components/graphic/SoilTemperaturePeriodGraphic.vue";
 
 const AVAILABLE_PERIOD_MAP: Record<string, string> = {
   [AVAILABLE_PERIOD.DAILY]: "Graphique de la journée",
@@ -87,7 +94,7 @@ const AVAILABLE_PERIOD_MAP: Record<string, string> = {
 
 const route = useRoute();
 
-const selectedPeriod = ref<string>(route.params.period || AVAILABLE_PERIOD.DAILY);
+const selectedPeriod = ref<string>(route.params.period.toString() || AVAILABLE_PERIOD.DAILY);
 
 const weatherStationReference = useCurrentWeatherStationReference();
 

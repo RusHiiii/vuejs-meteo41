@@ -28,17 +28,17 @@ const chartDatas = computed(() => {
   if (!props.graphData?.datas) return [];
 
   return [{
-    name: 'Humidité',
+    name: 'Température du sol (-30cm)',
     data: props.graphData.datas.map(data => ([
       new Date(data.receivedAt).getTime(),
-      data.humidity
+      data.soilTemperature
     ]))
   }];
 });
 
 const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.Humidity, props.graphData?.dateBegin, props.graphData?.dateEnd),
-  ...getDefaultTooltipOptions(props.graphData?.unit?.humidityUnit),
-  ...getDefaultAnnotationsOptions(props.history?.minHumidityReceivedAt, props.history?.maxHumidityReceivedAt, props.history?.minHumidity, props.history?.maxHumidity)
+  ...getDefaultChartOptions(ChartType.SoilTemperature, props.graphData?.dateBegin, props.graphData?.dateEnd),
+  ...getDefaultTooltipOptions(props.graphData?.unit?.temperatureUnit),
+  ...getDefaultAnnotationsOptions(props.history?.minSoilTemperatureReceivedAt, props.history?.maxSoilTemperatureReceivedAt, props.history?.minSoilTemperature, props.history?.maxSoilTemperature)
 }));
 </script>

@@ -1,8 +1,26 @@
 import moment, {type Moment} from 'moment';
 import fr from "apexcharts/dist/locales/fr.json";
-import type {HistoryWeatherGraphSearchResult} from "@/core/types/WeatherData.tsx";
+import {ChartType} from "@/core/types/PeriodGraphic.tsx";
 
-export function getDefaultChartOptions(graphData: HistoryWeatherGraphSearchResult | undefined): object {
+const chartOptions = {
+  [ChartType.Humidity]: {
+    min: 0,
+    max: 100,
+    text: 'Humidité'
+  },
+  [ChartType.SoilTemperature]: {
+    min: -5,
+    max: 35,
+    text: 'Température du sol (-30cm)'
+  },
+  [ChartType.Temperature]: {
+    min: -10,
+    max: 40,
+    text: 'Température, température ressentie et point de rosée'
+  }
+}
+
+export function getDefaultChartOptions(chartType: ChartType, dateBegin: string | undefined, dateEnd: string | undefined): object {
   return {
     colors: ['#e7bf22'],
     chart: {
@@ -34,7 +52,7 @@ export function getDefaultChartOptions(graphData: HistoryWeatherGraphSearchResul
       width: 2,
     },
     title: {
-      text: 'Humidité',
+      text: chartOptions[chartType].text,
       align: 'left',
     },
     grid: {
@@ -42,8 +60,8 @@ export function getDefaultChartOptions(graphData: HistoryWeatherGraphSearchResul
     },
     xaxis: {
       type: 'datetime',
-      min: moment(graphData?.dateBegin)?.unix() * 1000,
-      max: moment(graphData?.dateEnd)?.unix() * 1000,
+      min: moment(dateBegin)?.unix() * 1000,
+      max: moment(dateEnd)?.unix() * 1000,
       labels: {
         datetimeUTC: false,
       },
@@ -52,9 +70,64 @@ export function getDefaultChartOptions(graphData: HistoryWeatherGraphSearchResul
       showForSingleSeries: true,
     },
     yaxis: {
-      min: 0,
-      max: 100,
+      min: chartOptions[chartType].min,
+      max: chartOptions[chartType].max,
       forceNiceScale: true,
     }
+  }
+}
+
+export function getDefaultTooltipOptions(unit: string | undefined): object {
+  return {
+    tooltip: {
+      x: {
+        format: 'dd MMM HH:mm',
+      },
+      y: [
+        {
+          formatter: function (val: number) {
+            return `${val} ${unit}`;
+          },
+        },
+      ],
+    },
+  }
+}
+
+export function getDefaultAnnotationsOptions(
+    minReceivedAt: string | undefined,
+    maxReceivedAt: string | undefined,
+    minValue: number | string | undefined,
+    maxValue: number | string | undefined
+): object {
+  return {
+    annotations: {
+      xaxis: [
+        minReceivedAt && minValue ?
+            {
+              x: new Date(minReceivedAt).getTime(),
+              borderColor: '#999',
+              label: {
+                text: minValue.toString(),
+                style: {
+                  color: '#fff',
+                  background: '#09a8e6',
+                },
+              },
+            } : null,
+        maxReceivedAt && maxValue ?
+            {
+              x: new Date(maxReceivedAt).getTime(),
+              borderColor: '#999',
+              label: {
+                text: maxValue.toString(),
+                style: {
+                  color: '#fff',
+                  background: '#ed7839',
+                },
+              },
+            } : null,
+      ],
+    },
   }
 }
