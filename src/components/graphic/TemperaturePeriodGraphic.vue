@@ -29,7 +29,7 @@ const props = defineProps<{
 }>();
 
 const target = useTemplateRef<HTMLDivElement>('target');
-const isVisible = shallowRef(true);
+const isVisible = shallowRef(false);
 
 const { isActive } = useIntersectionObserver(
     target,
@@ -38,8 +38,10 @@ const { isActive } = useIntersectionObserver(
     }
 )
 
-const chartDatas = computed(() => {
-  if (!props.temperatureValues || !props.windChillValues || !props.dewpointValues || !isVisible.value) return [];
+const chartDatas = computed((previous) => {
+  if (!props.temperatureValues || !props.windChillValues || !props.dewpointValues || !isVisible.value) {
+    return previous ?? [];
+  }
 
   return [
     {

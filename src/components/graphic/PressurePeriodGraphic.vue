@@ -36,8 +36,10 @@ const { isActive } = useIntersectionObserver(
     }
 )
 
-const chartDatas = computed(() => {
-  if (!props.pressureValues || !isVisible.value) return [];
+const chartDatas = computed((previous) => {
+  if (!props.pressureValues || !isVisible.value) {
+    return previous ?? [];
+  }
 
   return [{
     name: 'Pression',
