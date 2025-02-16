@@ -60,6 +60,24 @@
               :period="periodName"
             />
 
+            <PressurePeriodGraphic
+                :graphData="weatherDataGraphHistory"
+                :history="weatherDataHistory"
+                :period="periodName"
+            />
+
+            <LeafWetnessPeriodGraphic
+                :graphData="weatherDataGraphHistory"
+                :history="weatherDataHistory"
+                :period="periodName"
+            />
+
+            <UvPeriodGraphic
+                :graphData="weatherDataGraphHistory"
+                :history="weatherDataHistory"
+                :period="periodName"
+            />
+
             <SoilTemperaturePeriodGraphic
                 :graphData="weatherDataGraphHistory"
                 :history="weatherDataHistory"
@@ -84,6 +102,9 @@ import {useRoute} from "vue-router";
 import {computed, ref} from "vue";
 import HumidityPeriodGraphic from "@/components/graphic/HumidityPeriodGraphic.vue";
 import SoilTemperaturePeriodGraphic from "@/components/graphic/SoilTemperaturePeriodGraphic.vue";
+import LeafWetnessPeriodGraphic from "@/components/graphic/LeafWetnessPeriodGraphic.vue";
+import UvPeriodGraphic from "@/components/graphic/UvPeriodGraphic.vue";
+import PressurePeriodGraphic from "@/components/graphic/PressurePeriodGraphic.vue";
 
 const AVAILABLE_PERIOD_MAP: Record<string, string> = {
   [AVAILABLE_PERIOD.DAILY]: "Graphique de la journée",

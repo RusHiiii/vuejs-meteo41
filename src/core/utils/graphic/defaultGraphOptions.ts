@@ -1,4 +1,4 @@
-import moment, {type Moment} from 'moment';
+import moment from 'moment';
 import fr from "apexcharts/dist/locales/fr.json";
 import {ChartType} from "@/core/types/PeriodGraphic.tsx";
 
@@ -8,15 +8,27 @@ const chartOptions = {
     max: 100,
     text: 'Humidité'
   },
+  [ChartType.LeafWetness]: {
+    min: 0,
+    max: 100,
+    text: 'Humidité foliaire'
+  },
   [ChartType.SoilTemperature]: {
-    min: -5,
-    max: 35,
     text: 'Température du sol (-30cm)'
   },
   [ChartType.Temperature]: {
     min: -10,
     max: 40,
     text: 'Température, température ressentie et point de rosée'
+  },
+  [ChartType.UV]: {
+    min: 0,
+    text: 'UV'
+  },
+  [ChartType.Pressure]: {
+    min: 990,
+    max: 1040,
+    text: 'Pression'
   }
 }
 
@@ -70,8 +82,6 @@ export function getDefaultChartOptions(chartType: ChartType, dateBegin: string |
       showForSingleSeries: true,
     },
     yaxis: {
-      min: chartOptions[chartType].min,
-      max: chartOptions[chartType].max,
       forceNiceScale: true,
     }
   }
