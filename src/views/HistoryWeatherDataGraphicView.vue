@@ -58,16 +58,21 @@
                 :graphData="weatherDataGraphHistory"
                 :history="weatherDataHistory"
                 :period="periodName"
+                :dewpointValues="formatedGraphicData?.dewpoint"
+                :temperatureValues="formatedGraphicData?.temperature"
+                :windChillValues="formatedGraphicData?.windchill"
             />
 
             <SoilTemperaturePeriodGraphic
                 :graphData="weatherDataGraphHistory"
                 :history="weatherDataHistory"
                 :period="periodName"
+                :soilTemperatureValues="formatedGraphicData?.soilTemperature"
             />
 
             <HumidityPeriodGraphic
                 :graphData="weatherDataGraphHistory"
+                :humidityValues="formatedGraphicData?.humidity"
                 :history="weatherDataHistory"
                 :period="periodName"
             />
@@ -76,24 +81,28 @@
                 :graphData="weatherDataGraphHistory"
                 :history="weatherDataHistory"
                 :period="periodName"
+                :leafWetnessValues="formatedGraphicData?.leafWetness"
             />
 
             <SolarRadiationPeriodGraphic
                 :graphData="weatherDataGraphHistory"
                 :history="weatherDataHistory"
                 :period="periodName"
+                :solarRadiationValues="formatedGraphicData?.solarRadiation"
             />
 
             <UvPeriodGraphic
                 :graphData="weatherDataGraphHistory"
                 :history="weatherDataHistory"
                 :period="periodName"
+                :uvValues="formatedGraphicData?.uv"
             />
 
             <PressurePeriodGraphic
                 :graphData="weatherDataGraphHistory"
                 :history="weatherDataHistory"
                 :period="periodName"
+                :pressureValues="formatedGraphicData?.pressure"
             />
           </div>
         </div>
@@ -104,14 +113,11 @@
 <script setup lang="ts">
 import {AVAILABLE_PERIOD, ROUTES} from "@/core/constant.ts";
 import BreadCrumb from "@/components/common/BreadCrumb.vue";
-import WeatherDataAccess from "@/components/common/weatherData/WeatherDataAccess.vue";
 import WeatherDataSummary from "@/components/common/weatherData/WeatherDataSummary.vue";
 import {useCurrentWeatherStationReference} from "@/stores/weatherStation.ts";
-import CurrentWeatherDataTable from "@/components/weatherData/CurrentWeatherDataTable.vue";
-import {useDetailWeatherData, useWeatherDataHistory, useWeatherDataHistoryGraph} from "@/hooks/weatherDataHook.ts";
-import {useObservationWeatherStation} from "@/hooks/weatherStationHook.ts";
+import {useWeatherDataHistory, useWeatherDataHistoryGraph} from "@/hooks/weatherDataHook.ts";
 import {useRoute} from "vue-router";
-import {computed, ref} from "vue";
+import {computed, reactive, ref} from "vue";
 import HumidityPeriodGraphic from "@/components/graphic/HumidityPeriodGraphic.vue";
 import SoilTemperaturePeriodGraphic from "@/components/graphic/SoilTemperaturePeriodGraphic.vue";
 import LeafWetnessPeriodGraphic from "@/components/graphic/LeafWetnessPeriodGraphic.vue";
@@ -126,7 +132,6 @@ const AVAILABLE_PERIOD_MAP: Record<string, string> = {
   [AVAILABLE_PERIOD.MONTHLY]: "Graphique du mois",
   [AVAILABLE_PERIOD.YEARLY]: "Graphique de l'année"
 };
-
 const route = useRoute();
 
 const selectedPeriod = ref<string>(route.params.period.toString() || AVAILABLE_PERIOD.DAILY);
@@ -135,6 +140,46 @@ const weatherStationReference = useCurrentWeatherStationReference();
 
 const periodName = computed(() => AVAILABLE_PERIOD_MAP[selectedPeriod.value]);
 
-const {data: weatherDataHistory, isError: isWeatherDataHistoryErrored, isLoading: isWeatherDataHistoryLoading} = useWeatherDataHistory(weatherStationReference, selectedPeriod);
-const {data: weatherDataGraphHistory, isError: isWeatherDataGraphHistoryErrored, isLoading: isWeatherDataGraphHistoryLoading} = useWeatherDataHistoryGraph(weatherStationReference, selectedPeriod);
+const {data: weatherDataHistory} = useWeatherDataHistory(weatherStationReference, selectedPeriod);
+const {data: weatherDataGraphHistory, isError: isWeatherDataGraphHistoryErrored} = useWeatherDataHistoryGraph(weatherStationReference, selectedPeriod);
+
+const formatedGraphicData = computed(() => {
+  const formatedGraphicData = {
+    humidity: [],
+    solarRadiation: [],
+    uv: [],
+    pressure: [],
+    temperature: [],
+    soilTemperature: [],
+    leafWetness: [],
+    dewpoint: [],
+    windchill: []
+  };
+
+  if (!weatherDataGraphHistory) return formatedGraphicData;
+
+  weatherDataGraphHistory.value.datas.map(data => {
+    const observedAt = new Date(data.receivedAt).getTime();
+
+    formatedGraphicData.humidity.push([observedAt, data.humidity]);
+    formatedGraphicData.solarRadiation.push([observedAt, data.solarRadiation]);
+    formatedGraphicData.uv.push([observedAt, data.uv]);
+    formatedGraphicData.pressure.push([observedAt, data.relativePressure]);
+    formatedGraphicData.temperature.push([observedAt, data.temperature]);
+    formatedGraphicData.dewpoint.push([observedAt, data.dewPoint]);
+    formatedGraphicData.windchill.push([observedAt, data.windChill]);
+
+    /** Optionnals sensors */
+
+    if (data.leafWetness !== null) {
+      formatedGraphicData.leafWetness.push([observedAt, data.leafWetness]);
+    }
+
+    if (data.soilTemperature !== null) {
+      formatedGraphicData.soilTemperature.push([observedAt, data.soilTemperature]);
+    }
+  })
+
+  return formatedGraphicData;
+});
 </script>

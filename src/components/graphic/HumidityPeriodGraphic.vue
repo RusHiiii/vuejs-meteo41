@@ -22,6 +22,7 @@ import {useIntersectionObserver} from "@vueuse/core";
 
 const props = defineProps<{
   graphData: HistoryWeatherGraphSearchResult | undefined,
+  humidityValues: number[] | undefined,
   history: HistoryWeatherData | undefined,
   period: string | undefined,
 }>();
@@ -37,14 +38,11 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed(() => {
-  if (!props.graphData?.datas || !isVisible.value) return [];
+  if (!props.humidityValues || !isVisible.value) return [];
 
   return [{
     name: 'Humidité',
-    data: props.graphData.datas.map(data => ([
-      new Date(data.receivedAt).getTime(),
-      data.humidity
-    ]))
+    data: props.humidityValues
   }];
 });
 
