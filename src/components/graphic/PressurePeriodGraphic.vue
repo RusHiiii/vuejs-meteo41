@@ -21,10 +21,9 @@ import {ChartType} from "@/core/types/PeriodGraphic.tsx";
 import {useIntersectionObserver} from "@vueuse/core";
 
 const props = defineProps<{
-  graphData: HistoryWeatherGraphSearchResult | undefined,
+  historyGraph: HistoryWeatherGraphSearchResult | undefined,
   pressureValues: number[] | undefined,
-  history: HistoryWeatherData | undefined,
-  period: string | undefined,
+  history: HistoryWeatherData | undefined
 }>();
 
 const target = useTemplateRef<HTMLDivElement>('target');
@@ -47,8 +46,8 @@ const chartDatas = computed(() => {
 });
 
 const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.Pressure, props.graphData?.dateBegin, props.graphData?.dateEnd),
-  ...getDefaultTooltipOptions(props.graphData?.unit?.pressureUnit),
+  ...getDefaultChartOptions(ChartType.Pressure, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+  ...getDefaultTooltipOptions(props.historyGraph?.unit?.pressureUnit),
   ...getDefaultAnnotationsOptions(props.history?.minRelativePressureReceivedAt, props.history?.maxRelativePressureReceivedAt, props.history?.minRelativePressure, props.history?.maxRelativePressure)
 }));
 </script>

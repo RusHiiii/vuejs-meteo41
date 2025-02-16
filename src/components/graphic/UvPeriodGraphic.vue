@@ -14,17 +14,15 @@ import type {HistoryWeatherData, HistoryWeatherGraphSearchResult} from "@/core/t
 import {computed, shallowRef, useTemplateRef} from "vue";
 import {
   getDefaultAnnotationsOptions,
-  getDefaultChartOptions,
-  getDefaultTooltipOptions
+  getDefaultChartOptions
 } from "@/core/utils/graphic/defaultGraphOptions.ts";
 import {ChartType} from "@/core/types/PeriodGraphic.tsx";
 import {useIntersectionObserver} from "@vueuse/core";
 
 const props = defineProps<{
-  graphData: HistoryWeatherGraphSearchResult | undefined,
+  historyGraph: HistoryWeatherGraphSearchResult | undefined,
   history: HistoryWeatherData | undefined,
-  uvValues: number[] | undefined,
-  period: string | undefined,
+  uvValues: number[] | undefined
 }>();
 
 const target = useTemplateRef<HTMLDivElement>('target');
@@ -47,7 +45,7 @@ const chartDatas = computed(() => {
 });
 
 const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.UV, props.graphData?.dateBegin, props.graphData?.dateEnd),
+  ...getDefaultChartOptions(ChartType.UV, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
   ...getDefaultAnnotationsOptions(undefined, props.history?.maxUvReceivedAt, undefined, props.history?.maxUv)
 }));
 </script>

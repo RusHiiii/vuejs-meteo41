@@ -21,10 +21,9 @@ import {ChartType} from "@/core/types/PeriodGraphic.tsx";
 import {useIntersectionObserver} from "@vueuse/core";
 
 const props = defineProps<{
-  graphData: HistoryWeatherGraphSearchResult | undefined,
+  historyGraph: HistoryWeatherGraphSearchResult | undefined,
   history: HistoryWeatherData | undefined,
-  soilTemperatureValues: number[] | undefined,
-  period: string | undefined,
+  soilTemperatureValues: number[] | undefined
 }>();
 
 const target = useTemplateRef<HTMLDivElement>('target');
@@ -47,8 +46,8 @@ const chartDatas = computed(() => {
 });
 
 const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.SoilTemperature, props.graphData?.dateBegin, props.graphData?.dateEnd),
-  ...getDefaultTooltipOptions(props.graphData?.unit?.temperatureUnit),
+  ...getDefaultChartOptions(ChartType.SoilTemperature, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+  ...getDefaultTooltipOptions(props.historyGraph?.unit?.temperatureUnit),
   ...getDefaultAnnotationsOptions(props.history?.minSoilTemperatureReceivedAt, props.history?.maxSoilTemperatureReceivedAt, props.history?.minSoilTemperature, props.history?.maxSoilTemperature)
 }));
 </script>

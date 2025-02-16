@@ -55,54 +55,47 @@
 
           <div v-if="weatherDataGraphHistory" class="content col-md-12">
             <TemperaturePeriodGraphic
-                :graphData="weatherDataGraphHistory"
+                :historyGraph="weatherDataGraphHistory"
                 :history="weatherDataHistory"
-                :period="periodName"
                 :dewpointValues="formatedGraphicData?.dewpoint"
                 :temperatureValues="formatedGraphicData?.temperature"
                 :windChillValues="formatedGraphicData?.windchill"
             />
 
             <SoilTemperaturePeriodGraphic
-                :graphData="weatherDataGraphHistory"
-                :history="weatherDataHistory"
-                :period="periodName"
-                :soilTemperatureValues="formatedGraphicData?.soilTemperature"
+              :historyGraph="weatherDataGraphHistory"
+              :history="weatherDataHistory"
+              :soilTemperatureValues="formatedGraphicData?.soilTemperature"
             />
 
             <HumidityPeriodGraphic
-                :graphData="weatherDataGraphHistory"
-                :humidityValues="formatedGraphicData?.humidity"
-                :history="weatherDataHistory"
-                :period="periodName"
+              :historyGraph="weatherDataGraphHistory"
+              :humidityValues="formatedGraphicData?.humidity"
+              :history="weatherDataHistory"
             />
 
             <LeafWetnessPeriodGraphic
-                :graphData="weatherDataGraphHistory"
-                :history="weatherDataHistory"
-                :period="periodName"
-                :leafWetnessValues="formatedGraphicData?.leafWetness"
+              :historyGraph="weatherDataGraphHistory"
+              :history="weatherDataHistory"
+              :leafWetnessValues="formatedGraphicData?.leafWetness"
             />
 
             <SolarRadiationPeriodGraphic
-                :graphData="weatherDataGraphHistory"
-                :history="weatherDataHistory"
-                :period="periodName"
-                :solarRadiationValues="formatedGraphicData?.solarRadiation"
+              :historyGraph="weatherDataGraphHistory"
+              :history="weatherDataHistory"
+              :solarRadiationValues="formatedGraphicData?.solarRadiation"
             />
 
             <UvPeriodGraphic
-                :graphData="weatherDataGraphHistory"
-                :history="weatherDataHistory"
-                :period="periodName"
-                :uvValues="formatedGraphicData?.uv"
+              :historyGraph="weatherDataGraphHistory"
+              :history="weatherDataHistory"
+              :uvValues="formatedGraphicData?.uv"
             />
 
             <PressurePeriodGraphic
-                :graphData="weatherDataGraphHistory"
-                :history="weatherDataHistory"
-                :period="periodName"
-                :pressureValues="formatedGraphicData?.pressure"
+              :historyGraph="weatherDataGraphHistory"
+              :history="weatherDataHistory"
+              :pressureValues="formatedGraphicData?.pressure"
             />
           </div>
         </div>
@@ -117,7 +110,7 @@ import WeatherDataSummary from "@/components/common/weatherData/WeatherDataSumma
 import {useCurrentWeatherStationReference} from "@/stores/weatherStation.ts";
 import {useWeatherDataHistory, useWeatherDataHistoryGraph} from "@/hooks/weatherDataHook.ts";
 import {useRoute} from "vue-router";
-import {computed, reactive, ref} from "vue";
+import {computed, ref} from "vue";
 import HumidityPeriodGraphic from "@/components/graphic/HumidityPeriodGraphic.vue";
 import SoilTemperaturePeriodGraphic from "@/components/graphic/SoilTemperaturePeriodGraphic.vue";
 import LeafWetnessPeriodGraphic from "@/components/graphic/LeafWetnessPeriodGraphic.vue";

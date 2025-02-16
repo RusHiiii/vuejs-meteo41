@@ -21,10 +21,9 @@ import {ChartType} from "@/core/types/PeriodGraphic.tsx";
 import {useIntersectionObserver} from "@vueuse/core";
 
 const props = defineProps<{
-  graphData: HistoryWeatherGraphSearchResult | undefined,
+  historyGraph: HistoryWeatherGraphSearchResult | undefined,
   history: HistoryWeatherData | undefined,
-  leafWetnessValues: number[] | undefined,
-  period: string | undefined,
+  leafWetnessValues: number[] | undefined
 }>();
 
 const target = useTemplateRef<HTMLDivElement>('target');
@@ -47,8 +46,8 @@ const chartDatas = computed(() => {
 });
 
 const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.LeafWetness, props.graphData?.dateBegin, props.graphData?.dateEnd),
-  ...getDefaultTooltipOptions(props.graphData?.unit?.humidityUnit),
+  ...getDefaultChartOptions(ChartType.LeafWetness, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+  ...getDefaultTooltipOptions(props.historyGraph?.unit?.humidityUnit),
   ...getDefaultAnnotationsOptions(undefined, props.history?.maxLeafWetnessReceivedAt, undefined, props.history?.maxLeafWetness)
 }));
 </script>

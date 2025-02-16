@@ -21,10 +21,9 @@ import {ChartType} from "@/core/types/PeriodGraphic.tsx";
 import {useIntersectionObserver} from "@vueuse/core";
 
 const props = defineProps<{
-  graphData: HistoryWeatherGraphSearchResult | undefined,
+  historyGraph: HistoryWeatherGraphSearchResult | undefined,
   history: HistoryWeatherData | undefined,
-  solarRadiationValues: number[] | undefined,
-  period: string | undefined,
+  solarRadiationValues: number[] | undefined
 }>();
 
 const target = useTemplateRef<HTMLDivElement>('target');
@@ -47,8 +46,8 @@ const chartDatas = computed(() => {
 });
 
 const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.SolarRadiation, props.graphData?.dateBegin, props.graphData?.dateEnd),
-  ...getDefaultTooltipOptions(props.graphData?.unit?.solarRadiationUnit),
+  ...getDefaultChartOptions(ChartType.SolarRadiation, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+  ...getDefaultTooltipOptions(props.historyGraph?.unit?.solarRadiationUnit),
   ...getDefaultAnnotationsOptions(undefined, props.history?.maxSolarRadiationReceivedAt, undefined, props.history?.maxSolarRadiation)
 }));
 </script>
