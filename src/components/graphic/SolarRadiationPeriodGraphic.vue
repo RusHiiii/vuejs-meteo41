@@ -28,17 +28,17 @@ const chartDatas = computed(() => {
   if (!props.graphData?.datas) return [];
 
   return [{
-    name: 'Humidité foliaire',
+    name: 'Radiation solaire',
     data: props.graphData.datas.map(data => ([
       new Date(data.receivedAt).getTime(),
-      data.leafWetness
+      data.solarRadiation
     ]))
   }];
 });
 
 const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.LeafWetness, props.graphData?.dateBegin, props.graphData?.dateEnd),
-  ...getDefaultTooltipOptions(props.graphData?.unit?.humidityUnit),
-  ...getDefaultAnnotationsOptions(undefined, props.history?.maxLeafWetnessReceivedAt, undefined, props.history?.maxLeafWetness)
+  ...getDefaultChartOptions(ChartType.SolarRadiation, props.graphData?.dateBegin, props.graphData?.dateEnd),
+  ...getDefaultTooltipOptions(props.graphData?.unit?.solarRadiationUnit),
+  ...getDefaultAnnotationsOptions(undefined, props.history?.maxSolarRadiationReceivedAt, undefined, props.history?.maxSolarRadiation)
 }));
 </script>

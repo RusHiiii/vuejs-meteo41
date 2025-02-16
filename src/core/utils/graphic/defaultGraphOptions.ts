@@ -4,37 +4,38 @@ import {ChartType} from "@/core/types/PeriodGraphic.tsx";
 
 const chartOptions = {
   [ChartType.Humidity]: {
-    min: 0,
-    max: 100,
-    text: 'Humidité'
+    text: 'Humidité',
+    colors: ['#e7bf22'],
   },
   [ChartType.LeafWetness]: {
-    min: 0,
-    max: 100,
-    text: 'Humidité foliaire'
+    text: 'Humidité foliaire',
+    colors: ['#e7bf22'],
   },
   [ChartType.SoilTemperature]: {
-    text: 'Température du sol (-30cm)'
+    text: 'Température du sol (-30cm)',
+    colors: ['#e7bf22'],
   },
   [ChartType.Temperature]: {
-    min: -10,
-    max: 40,
-    text: 'Température, température ressentie et point de rosée'
+    text: 'Température, température ressentie et point de rosée',
+    colors: ['#dec137', '#7ab11b', '#09a8e6'],
   },
   [ChartType.UV]: {
-    min: 0,
-    text: 'UV'
+    text: 'UV',
+    colors: ['#e7bf22'],
   },
   [ChartType.Pressure]: {
-    min: 990,
-    max: 1040,
-    text: 'Pression'
+    text: 'Pression',
+    colors: ['#e7bf22'],
+  },
+  [ChartType.SolarRadiation]: {
+    text: 'Radiation solaire',
+    colors: ['#e7bf22'],
   }
 }
 
 export function getDefaultChartOptions(chartType: ChartType, dateBegin: string | undefined, dateEnd: string | undefined): object {
   return {
-    colors: ['#e7bf22'],
+    colors: chartOptions[chartType].colors,
     chart: {
       locales: [fr],
       defaultLocale: 'fr',
@@ -94,6 +95,16 @@ export function getDefaultTooltipOptions(unit: string | undefined): object {
         format: 'dd MMM HH:mm',
       },
       y: [
+        {
+          formatter: function (val: number) {
+            return `${val} ${unit}`;
+          },
+        },
+        {
+          formatter: function (val: number) {
+            return `${val} ${unit}`;
+          },
+        },
         {
           formatter: function (val: number) {
             return `${val} ${unit}`;

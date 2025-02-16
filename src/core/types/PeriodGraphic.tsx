@@ -5,5 +5,6 @@ export enum ChartType {
   Humidity = 'humidity',
   LeafWetness = 'leafWetness',
   UV = 'UV',
-  Pressure = 'Pressure'
+  Pressure = 'Pressure',
+  SolarRadiation = 'solarRadiation'
 }

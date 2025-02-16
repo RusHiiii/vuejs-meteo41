@@ -54,13 +54,19 @@
           <WeatherDataSummary />
 
           <div v-if="weatherDataGraphHistory" class="content col-md-12">
-            <HumidityPeriodGraphic
-              :graphData="weatherDataGraphHistory"
-              :history="weatherDataHistory"
-              :period="periodName"
+            <TemperaturePeriodGraphic
+                :graphData="weatherDataGraphHistory"
+                :history="weatherDataHistory"
+                :period="periodName"
             />
 
-            <PressurePeriodGraphic
+            <SoilTemperaturePeriodGraphic
+                :graphData="weatherDataGraphHistory"
+                :history="weatherDataHistory"
+                :period="periodName"
+            />
+
+            <HumidityPeriodGraphic
                 :graphData="weatherDataGraphHistory"
                 :history="weatherDataHistory"
                 :period="periodName"
@@ -72,13 +78,19 @@
                 :period="periodName"
             />
 
+            <SolarRadiationPeriodGraphic
+                :graphData="weatherDataGraphHistory"
+                :history="weatherDataHistory"
+                :period="periodName"
+            />
+
             <UvPeriodGraphic
                 :graphData="weatherDataGraphHistory"
                 :history="weatherDataHistory"
                 :period="periodName"
             />
 
-            <SoilTemperaturePeriodGraphic
+            <PressurePeriodGraphic
                 :graphData="weatherDataGraphHistory"
                 :history="weatherDataHistory"
                 :period="periodName"
@@ -105,6 +117,8 @@ import SoilTemperaturePeriodGraphic from "@/components/graphic/SoilTemperaturePe
 import LeafWetnessPeriodGraphic from "@/components/graphic/LeafWetnessPeriodGraphic.vue";
 import UvPeriodGraphic from "@/components/graphic/UvPeriodGraphic.vue";
 import PressurePeriodGraphic from "@/components/graphic/PressurePeriodGraphic.vue";
+import TemperaturePeriodGraphic from "@/components/graphic/TemperaturePeriodGraphic.vue";
+import SolarRadiationPeriodGraphic from "@/components/graphic/SolarRadiationPeriodGraphic.vue";
 
 const AVAILABLE_PERIOD_MAP: Record<string, string> = {
   [AVAILABLE_PERIOD.DAILY]: "Graphique de la journée",
