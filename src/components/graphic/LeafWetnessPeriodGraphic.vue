@@ -23,6 +23,7 @@ import {useIntersectionObserver} from "@vueuse/core";
 const props = defineProps<{
   graphData: HistoryWeatherGraphSearchResult | undefined,
   history: HistoryWeatherData | undefined,
+  leafWetnessValues: number[] | undefined,
   period: string | undefined,
 }>();
 
@@ -37,14 +38,11 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed(() => {
-  if (!props.graphData?.datas || !isVisible.value) return [];
+  if (!props.leafWetnessValues || !isVisible.value) return [];
 
   return [{
     name: 'Humidité foliaire',
-    data: props.graphData.datas.map(data => ([
-      new Date(data.receivedAt).getTime(),
-      data.leafWetness
-    ]))
+    data: props.leafWetnessValues
   }];
 });
 

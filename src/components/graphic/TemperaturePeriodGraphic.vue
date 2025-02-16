@@ -23,6 +23,9 @@ import {useIntersectionObserver} from "@vueuse/core";
 const props = defineProps<{
   graphData: HistoryWeatherGraphSearchResult | undefined,
   history: HistoryWeatherData | undefined,
+  temperatureValues: number[] | undefined,
+  dewpointValues: number[] | undefined,
+  windChillValues: number[] | undefined,
   period: string | undefined,
 }>();
 
@@ -37,41 +40,20 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed(() => {
-  if (!props.graphData?.datas || !isVisible.value) return [];
-
-  let dataTemp = [];
-  let windChill = [];
-  let dewPoint = [];
-
-  props.graphData.datas.map(data => {
-    dataTemp.push([
-      new Date(data.receivedAt).getTime(),
-      data.temperature
-    ]);
-
-    dewPoint.push([
-      new Date(data.receivedAt).getTime(),
-      data.dewPoint
-    ]);
-
-    windChill.push([
-      new Date(data.receivedAt).getTime(),
-      data.windChill
-    ]);
-  });
+  if (!props.temperatureValues || !props.windChillValues || !props.dewpointValues || !isVisible.value) return [];
 
   return [
     {
       name: 'Température',
-      data: dataTemp
+      data: props.temperatureValues
     },
     {
       name: 'Température ressentie',
-      data: windChill
+      data: props.windChillValues
     },
     {
       name: 'Point de rosée',
-      data: dewPoint
+      data: props.dewpointValues
     }
 ]});
 
