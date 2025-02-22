@@ -23,9 +23,9 @@ import {useIntersectionObserver} from "@vueuse/core";
 const props = defineProps<{
   historyGraph: HistoryWeatherGraphSearchResult | undefined,
   history: HistoryWeatherData | undefined,
-  temperatureValues: number[] | undefined,
-  dewpointValues: number[] | undefined,
-  windChillValues: number[] | undefined
+  pm25Values: number[] | undefined,
+  aqiValues: number[] | undefined,
+  aqiAvgValues: number[] | undefined
 }>();
 
 const target = useTemplateRef<HTMLDivElement>('target');
@@ -39,28 +39,28 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed((previous) => {
-  if (!props.temperatureValues || !props.windChillValues || !props.dewpointValues || !isVisible.value) {
+  if (!props.pm25Values || !props.aqiValues || !props.aqiAvgValues || !isVisible.value) {
     return previous ?? [];
   }
 
   return [
     {
-      name: 'Température',
-      data: props.temperatureValues
+      name: 'Qualité de l\'air',
+      data: props.aqiValues
     },
     {
-      name: 'Température ressentie',
-      data: props.windChillValues
+      name: 'Qualité de l\'air moyen',
+      data: props.aqiAvgValues
     },
     {
-      name: 'Point de rosée',
-      data: props.dewpointValues
+      name: 'Particule fine',
+      data: props.pm25Values
     }
 ]});
 
 const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.Temperature, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
-  ...getDefaultTooltipOptions(props.historyGraph?.unit?.temperatureUnit),
-  ...getDefaultAnnotationsOptions(props.history?.minTemperatureReceivedAt, props.history?.maxTemperatureReceivedAt, props.history?.minTemperature, props.history?.maxTemperature)
+  ...getDefaultChartOptions(ChartType.PM, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+  ...getDefaultTooltipOptions('', '', props.historyGraph?.unit?.pmUnit),
+  ...getDefaultAnnotationsOptions(props.history?.minPm25ReceivedAt, props.history?.maxPm25ReceivedAt, props.history?.minPm25, props.history?.maxPm25)
 }));
 </script>

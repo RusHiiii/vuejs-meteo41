@@ -27,6 +27,10 @@ const chartOptions = {
     text: 'Pression',
     colors: ['#e7bf22'],
   },
+  [ChartType.PM]: {
+    text: 'Particule fine',
+    colors: ['#dec137', '#7ab11b', '#09a8e6'],
+  },
   [ChartType.Rain]: {
     text: 'Pluie',
     colors: ['#dec137', '#09a8e6'],
@@ -87,7 +91,7 @@ export function getDefaultChartOptions(chartType: ChartType, dateBegin: string |
       showForSingleSeries: true,
     },
     yaxis: {
-      forceNiceScale: true,
+      forceNiceScale: true
     }
   }
 }

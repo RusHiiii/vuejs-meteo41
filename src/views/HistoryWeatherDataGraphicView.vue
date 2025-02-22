@@ -55,11 +55,11 @@
 
           <div v-if="weatherDataGraphHistory" class="content col-md-12">
             <TemperaturePeriodGraphic
-                :historyGraph="weatherDataGraphHistory"
-                :history="weatherDataHistory"
-                :dewpointValues="formatedGraphicData?.dewpoint"
-                :temperatureValues="formatedGraphicData?.temperature"
-                :windChillValues="formatedGraphicData?.windchill"
+              :historyGraph="weatherDataGraphHistory"
+              :history="weatherDataHistory"
+              :dewpointValues="formatedGraphicData?.dewpoint"
+              :temperatureValues="formatedGraphicData?.temperature"
+              :windChillValues="formatedGraphicData?.windchill"
             />
 
             <SoilTemperaturePeriodGraphic
@@ -93,16 +93,24 @@
             />
 
             <RainPeriodGraphic
-                :historyGraph="weatherDataGraphHistory"
-                :history="weatherDataHistory"
-                :rainValues="formatedGraphicData?.rain"
-                :rainRateValues="formatedGraphicData?.rainRate"
+              :historyGraph="weatherDataGraphHistory"
+              :history="weatherDataHistory"
+              :rainValues="formatedGraphicData?.rain"
+              :rainRateValues="formatedGraphicData?.rainRate"
             />
 
             <PressurePeriodGraphic
               :historyGraph="weatherDataGraphHistory"
               :history="weatherDataHistory"
               :pressureValues="formatedGraphicData?.pressure"
+            />
+
+            <PMPeriodGraphic
+              :historyGraph="weatherDataGraphHistory"
+              :history="weatherDataHistory"
+              :pm25Values="formatedGraphicData?.pm25"
+              :aqiValues="formatedGraphicData?.aqi"
+              :aqiAvgValues="formatedGraphicData?.aqiAvg"
             />
           </div>
         </div>
@@ -127,6 +135,7 @@ import TemperaturePeriodGraphic from "@/components/graphic/TemperaturePeriodGrap
 import SolarRadiationPeriodGraphic from "@/components/graphic/SolarRadiationPeriodGraphic.vue";
 import type {WeatherGraphData} from "@/core/types/WeatherData.tsx";
 import RainPeriodGraphic from "@/components/graphic/RainPeriodGraphic.vue";
+import PMPeriodGraphic from "@/components/graphic/PMPeriodGraphic.vue";
 
 const AVAILABLE_PERIOD_MAP: Record<string, string> = {
   [AVAILABLE_PERIOD.DAILY]: "Graphique de la journée",
@@ -145,7 +154,7 @@ const periodName = computed(() => AVAILABLE_PERIOD_MAP[selectedPeriod.value]);
 const {data: weatherDataHistory} = useWeatherDataHistory(weatherStationReference, selectedPeriod);
 const {data: weatherDataGraphHistory, isError: isWeatherDataGraphHistoryErrored} = useWeatherDataHistoryGraph(weatherStationReference, selectedPeriod);
 
-const formatedGraphicData = computed(() => {
+const formatedGraphicData = computed((previous) => {
   const formatedGraphicData = {
     humidity: [],
     solarRadiation: [],
@@ -157,6 +166,9 @@ const formatedGraphicData = computed(() => {
     dewpoint: [],
     windchill: [],
     rain: [],
+    aqi: [],
+    aqiAvg: [],
+    pm25: [],
     rainRate: []
   };
 
@@ -183,6 +195,18 @@ const formatedGraphicData = computed(() => {
 
     if (data.soilTemperature !== null) {
       formatedGraphicData.soilTemperature.push([observedAt, data.soilTemperature]);
+    }
+
+    if (data.pm25 !== null) {
+      formatedGraphicData.pm25.push([observedAt, data.pm25]);
+    }
+
+    if (data.aqi !== null) {
+      formatedGraphicData.aqi.push([observedAt, data.aqi]);
+    }
+
+    if (data.aqiAvg !== null) {
+      formatedGraphicData.aqiAvg.push([observedAt, data.aqiAvg]);
     }
   })
 
