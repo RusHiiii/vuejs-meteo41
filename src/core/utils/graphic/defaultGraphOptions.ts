@@ -27,6 +27,10 @@ const chartOptions = {
     text: 'Pression',
     colors: ['#e7bf22'],
   },
+  [ChartType.Rain]: {
+    text: 'Pluie',
+    colors: ['#dec137', '#09a8e6'],
+  },
   [ChartType.SolarRadiation]: {
     text: 'Radiation solaire',
     colors: ['#e7bf22'],
@@ -88,7 +92,7 @@ export function getDefaultChartOptions(chartType: ChartType, dateBegin: string |
   }
 }
 
-export function getDefaultTooltipOptions(unit: string | undefined): object {
+export function getDefaultTooltipOptions(firstGraphUnit: string | undefined, secondGraphUnit: string | undefined = undefined, thirdGraphUnit: string | undefined = undefined): object {
   return {
     tooltip: {
       x: {
@@ -97,17 +101,17 @@ export function getDefaultTooltipOptions(unit: string | undefined): object {
       y: [
         {
           formatter: function (val: number) {
-            return `${val} ${unit}`;
+            return `${val} ${firstGraphUnit}`;
           },
         },
         {
           formatter: function (val: number) {
-            return `${val} ${unit}`;
+            return `${val} ${secondGraphUnit ?? firstGraphUnit}`;
           },
         },
         {
           formatter: function (val: number) {
-            return `${val} ${unit}`;
+            return `${val} ${thirdGraphUnit ?? firstGraphUnit}`;
           },
         },
       ],

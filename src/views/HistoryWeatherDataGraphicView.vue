@@ -92,6 +92,13 @@
               :uvValues="formatedGraphicData?.uv"
             />
 
+            <RainPeriodGraphic
+                :historyGraph="weatherDataGraphHistory"
+                :history="weatherDataHistory"
+                :rainValues="formatedGraphicData?.rain"
+                :rainRateValues="formatedGraphicData?.rainRate"
+            />
+
             <PressurePeriodGraphic
               :historyGraph="weatherDataGraphHistory"
               :history="weatherDataHistory"
@@ -118,6 +125,8 @@ import UvPeriodGraphic from "@/components/graphic/UvPeriodGraphic.vue";
 import PressurePeriodGraphic from "@/components/graphic/PressurePeriodGraphic.vue";
 import TemperaturePeriodGraphic from "@/components/graphic/TemperaturePeriodGraphic.vue";
 import SolarRadiationPeriodGraphic from "@/components/graphic/SolarRadiationPeriodGraphic.vue";
+import type {WeatherGraphData} from "@/core/types/WeatherData.tsx";
+import RainPeriodGraphic from "@/components/graphic/RainPeriodGraphic.vue";
 
 const AVAILABLE_PERIOD_MAP: Record<string, string> = {
   [AVAILABLE_PERIOD.DAILY]: "Graphique de la journée",
@@ -146,12 +155,14 @@ const formatedGraphicData = computed(() => {
     soilTemperature: [],
     leafWetness: [],
     dewpoint: [],
-    windchill: []
+    windchill: [],
+    rain: [],
+    rainRate: []
   };
 
   if (!weatherDataGraphHistory) return formatedGraphicData;
 
-  weatherDataGraphHistory.value.datas.map(data => {
+  weatherDataGraphHistory.value.datas.map((data: WeatherGraphData) => {
     const observedAt = new Date(data.receivedAt).getTime();
 
     formatedGraphicData.humidity.push([observedAt, data.humidity]);
@@ -161,6 +172,8 @@ const formatedGraphicData = computed(() => {
     formatedGraphicData.temperature.push([observedAt, data.temperature]);
     formatedGraphicData.dewpoint.push([observedAt, data.dewPoint]);
     formatedGraphicData.windchill.push([observedAt, data.windChill]);
+    formatedGraphicData.rain.push([observedAt, data.rainDaily]);
+    formatedGraphicData.rainRate.push([observedAt, data.rainRate]);
 
     /** Optionnals sensors */
 

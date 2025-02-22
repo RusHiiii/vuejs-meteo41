@@ -1,6 +1,3 @@
-import type {WeatherStation} from "@/core/types/WeatherStation.tsx";
-import type {User} from "@/core/types/User.tsx";
-
 export enum ChartType {
   Temperature = 'temperature',
   SoilTemperature  = 'soilTemperature',
@@ -8,5 +5,6 @@ export enum ChartType {
   LeafWetness = 'leafWetness',
   UV = 'UV',
   Pressure = 'Pressure',
+  Rain = 'Rain',
   SolarRadiation = 'solarRadiation'
 }
