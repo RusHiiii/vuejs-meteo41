@@ -1,7 +1,7 @@
 <template>
   <BreadCrumb
     :url="ROUTES.HOME"
-    :text="periodName"
+    :text="periodInformation.title"
     page="Graphiques"
   />
 
@@ -11,7 +11,7 @@
         <div class="fullwidth-block padding-content">
           <div class="content col-md-12">
             <div class="post single">
-              <h2 class="entry-title">{{periodName}}</h2>
+              <h2 class="entry-title">{{periodInformation.title}}</h2>
             </div>
           </div>
           <div class="content col-md-8">
@@ -29,7 +29,8 @@
                 </div>
 
                 <p>
-                  {{weatherDataHistory?.weatherStation.shortDescription}}
+                  Les graphiques représentent les données reçu par la station localisées à  {{weatherStation.city}}.
+                  {{periodInformation.text}}
                 </p>
 
                 <div class="pagination">
@@ -53,7 +54,7 @@
 
           <WeatherDataSummary />
 
-          <div v-if="weatherDataGraphHistory" class="content col-md-12">
+          <div class="content col-md-12">
             <TemperaturePeriodGraphic
               :historyGraph="weatherDataGraphHistory"
               :history="weatherDataHistory"
@@ -136,12 +137,25 @@ import SolarRadiationPeriodGraphic from "@/components/graphic/SolarRadiationPeri
 import type {WeatherGraphData} from "@/core/types/WeatherData.tsx";
 import RainPeriodGraphic from "@/components/graphic/RainPeriodGraphic.vue";
 import PMPeriodGraphic from "@/components/graphic/PMPeriodGraphic.vue";
+import {useWeatherStation} from "@/hooks/weatherStationHook.ts";
 
-const AVAILABLE_PERIOD_MAP: Record<string, string> = {
-  [AVAILABLE_PERIOD.DAILY]: "Graphique de la journée",
-  [AVAILABLE_PERIOD.WEEKLY]: "Graphique de la semaine",
-  [AVAILABLE_PERIOD.MONTHLY]: "Graphique du mois",
-  [AVAILABLE_PERIOD.YEARLY]: "Graphique de l'année"
+const AVAILABLE_PERIOD_MAP: Record<string, {title: string, text: string}> = {
+  [AVAILABLE_PERIOD.DAILY]: {
+    title: "Graphique de la journée",
+    text: "Les données journalières sont espacées toutes les 2 minutes."
+  },
+  [AVAILABLE_PERIOD.WEEKLY]: {
+    title: "Graphique de la semaine",
+    text: "Les données hebdomadaires sont espacées toutes les 10 minutes."
+  },
+  [AVAILABLE_PERIOD.MONTHLY]: {
+    title: "Graphique du mois",
+    text: "Les données mensuels sont espacées toutes les 30 minutes."
+  },
+  [AVAILABLE_PERIOD.YEARLY]: {
+    title: "Graphique de l'année",
+    text: "Les données annuelles sont espacées toutes les 120 minutes."
+  }
 };
 const route = useRoute();
 
@@ -149,9 +163,10 @@ const selectedPeriod = ref<string>(route.params.period.toString() || AVAILABLE_P
 
 const weatherStationReference = useCurrentWeatherStationReference();
 
-const periodName = computed(() => AVAILABLE_PERIOD_MAP[selectedPeriod.value]);
+const periodInformation = computed(() => AVAILABLE_PERIOD_MAP[selectedPeriod.value]);
 
 const {data: weatherDataHistory} = useWeatherDataHistory(weatherStationReference, selectedPeriod);
+const {data: weatherStation} = useWeatherStation(weatherStationReference);
 const {data: weatherDataGraphHistory, isError: isWeatherDataGraphHistoryErrored} = useWeatherDataHistoryGraph(weatherStationReference, selectedPeriod);
 
 const formatedGraphicData = computed((previous) => {
@@ -172,7 +187,7 @@ const formatedGraphicData = computed((previous) => {
     rainRate: []
   };
 
-  if (!weatherDataGraphHistory) return formatedGraphicData;
+  if (!weatherDataGraphHistory.value) return formatedGraphicData;
 
   weatherDataGraphHistory.value.datas.map((data: WeatherGraphData) => {
     const observedAt = new Date(data.receivedAt).getTime();
