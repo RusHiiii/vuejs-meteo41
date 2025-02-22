@@ -29,7 +29,7 @@
                 </div>
 
                 <p>
-                  Les graphiques représentent les données reçu par la station localisées à  {{weatherStation.city}}.
+                  Les graphiques représentent les données reçues par la station localisées à  {{weatherStation?.city}}.
                   {{periodInformation.text}}
                 </p>
 
@@ -189,7 +189,7 @@ const formatedGraphicData = computed((previous) => {
 
   if (!weatherDataGraphHistory.value) return formatedGraphicData;
 
-  weatherDataGraphHistory.value.datas.map((data: WeatherGraphData) => {
+  weatherDataGraphHistory.value.datas.forEach((data: WeatherGraphData) => {
     const observedAt = new Date(data.receivedAt).getTime();
 
     formatedGraphicData.humidity.push([observedAt, data.humidity]);
@@ -202,27 +202,11 @@ const formatedGraphicData = computed((previous) => {
     formatedGraphicData.rain.push([observedAt, data.rainDaily]);
     formatedGraphicData.rainRate.push([observedAt, data.rainRate]);
 
-    /** Optionnals sensors */
-
-    if (data.leafWetness !== null) {
-      formatedGraphicData.leafWetness.push([observedAt, data.leafWetness]);
-    }
-
-    if (data.soilTemperature !== null) {
-      formatedGraphicData.soilTemperature.push([observedAt, data.soilTemperature]);
-    }
-
-    if (data.pm25 !== null) {
-      formatedGraphicData.pm25.push([observedAt, data.pm25]);
-    }
-
-    if (data.aqi !== null) {
-      formatedGraphicData.aqi.push([observedAt, data.aqi]);
-    }
-
-    if (data.aqiAvg !== null) {
-      formatedGraphicData.aqiAvg.push([observedAt, data.aqiAvg]);
-    }
+    if (data.leafWetness != null) formatedGraphicData.leafWetness.push([observedAt, data.leafWetness]);
+    if (data.soilTemperature != null) formatedGraphicData.soilTemperature.push([observedAt, data.soilTemperature]);
+    if (data.pm25 != null) formatedGraphicData.pm25.push([observedAt, data.pm25]);
+    if (data.aqi != null) formatedGraphicData.aqi.push([observedAt, data.aqi]);
+    if (data.aqiAvg != null) formatedGraphicData.aqiAvg.push([observedAt, data.aqiAvg]);
   })
 
   return formatedGraphicData;
