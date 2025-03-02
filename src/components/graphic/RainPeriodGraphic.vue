@@ -38,7 +38,7 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed((previous) => {
-  if (!props.rainValues || !props.rainRateValues || !isVisible.value) {
+  if (!props.rainValues?.length || !props.rainRateValues?.length || !isVisible.value) {
     return previous ?? [];
   }
 
@@ -54,9 +54,15 @@ const chartDatas = computed((previous) => {
   ];
 });
 
-const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.Rain, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
-  ...getDefaultTooltipOptions(props.historyGraph?.unit?.rainUnit, props.historyGraph?.unit?.rainUnit + '/h'),
-  ...getDefaultAnnotationsOptions(undefined, props.history?.maxRainRateReceivedAt, undefined, props.history?.maxRainRate)
-}));
+const chartOptions = computed((previous) => {
+  if (!props.rainValues?.length || !props.rainRateValues?.length || !isVisible.value) {
+    return previous ?? {};
+  }
+
+  return {
+    ...getDefaultChartOptions(ChartType.Rain, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+    ...getDefaultTooltipOptions(props.historyGraph?.unit?.rainUnit, props.historyGraph?.unit?.rainUnit + '/h'),
+    ...getDefaultAnnotationsOptions(undefined, props.history?.maxRainRateReceivedAt, undefined, props.history?.maxRainRate)
+  }
+});
 </script>

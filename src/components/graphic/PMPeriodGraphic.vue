@@ -39,7 +39,7 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed((previous) => {
-  if (!props.pm25Values || !props.aqiValues || !props.aqiAvgValues || !isVisible.value) {
+  if (!props.pm25Values?.length || !props.aqiValues?.length || !props.aqiAvgValues?.length || !isVisible.value) {
     return previous ?? [];
   }
 
@@ -58,9 +58,15 @@ const chartDatas = computed((previous) => {
     }
 ]});
 
-const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.PM, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
-  ...getDefaultTooltipOptions('', '', props.historyGraph?.unit?.pmUnit),
-  ...getDefaultAnnotationsOptions(props.history?.minPm25ReceivedAt, props.history?.maxPm25ReceivedAt, props.history?.minPm25, props.history?.maxPm25)
-}));
+const chartOptions = computed((previous) => {
+  if (!props.pm25Values?.length || !props.aqiValues?.length || !props.aqiAvgValues?.length || !isVisible.value) {
+    return previous ?? {};
+  }
+
+  return {
+    ...getDefaultChartOptions(ChartType.PM, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+    ...getDefaultTooltipOptions('', '', props.historyGraph?.unit?.pmUnit),
+    ...getDefaultAnnotationsOptions(props.history?.minPm25ReceivedAt, props.history?.maxPm25ReceivedAt, props.history?.minPm25, props.history?.maxPm25)
+  }
+});
 </script>

@@ -37,7 +37,7 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed((previous) => {
-  if (!props.pressureValues || !isVisible.value) {
+  if (!props.pressureValues?.length || !isVisible.value) {
     return previous ?? [];
   }
 
@@ -47,9 +47,15 @@ const chartDatas = computed((previous) => {
   }];
 });
 
-const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.Pressure, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
-  ...getDefaultTooltipOptions(props.historyGraph?.unit?.pressureUnit),
-  ...getDefaultAnnotationsOptions(props.history?.minRelativePressureReceivedAt, props.history?.maxRelativePressureReceivedAt, props.history?.minRelativePressure, props.history?.maxRelativePressure)
-}));
+const chartOptions = computed((previous) => {
+  if (!props.pressureValues?.length || !isVisible.value) {
+    return previous ?? {};
+  }
+
+  return {
+    ...getDefaultChartOptions(ChartType.Pressure, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+    ...getDefaultTooltipOptions(props.historyGraph?.unit?.pressureUnit),
+    ...getDefaultAnnotationsOptions(props.history?.minRelativePressureReceivedAt, props.history?.maxRelativePressureReceivedAt, props.history?.minRelativePressure, props.history?.maxRelativePressure)
+  }
+});
 </script>

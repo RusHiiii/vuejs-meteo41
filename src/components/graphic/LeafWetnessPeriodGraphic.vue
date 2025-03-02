@@ -37,7 +37,7 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed((previous) => {
-  if (!props.leafWetnessValues || !isVisible.value) {
+  if (!props.leafWetnessValues?.length || !isVisible.value) {
     return previous ?? [];
   }
 
@@ -47,9 +47,15 @@ const chartDatas = computed((previous) => {
   }];
 });
 
-const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.LeafWetness, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
-  ...getDefaultTooltipOptions(props.historyGraph?.unit?.humidityUnit),
-  ...getDefaultAnnotationsOptions(undefined, props.history?.maxLeafWetnessReceivedAt, undefined, props.history?.maxLeafWetness)
-}));
+const chartOptions = computed((previous) => {
+  if (!props.leafWetnessValues?.length || !isVisible.value) {
+    return previous ?? {};
+  }
+
+  return {
+    ...getDefaultChartOptions(ChartType.LeafWetness, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+    ...getDefaultTooltipOptions(props.historyGraph?.unit?.humidityUnit),
+    ...getDefaultAnnotationsOptions(undefined, props.history?.maxLeafWetnessReceivedAt, undefined, props.history?.maxLeafWetness)
+  }
+});
 </script>

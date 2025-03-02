@@ -39,7 +39,7 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed((previous) => {
-  if (!props.temperatureValues || !props.windChillValues || !props.dewpointValues || !isVisible.value) {
+  if (!props.temperatureValues?.length || !props.windChillValues?.length || !props.dewpointValues?.length || !isVisible.value) {
     return previous ?? [];
   }
 
@@ -58,9 +58,15 @@ const chartDatas = computed((previous) => {
     }
 ]});
 
-const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.Temperature, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
-  ...getDefaultTooltipOptions(props.historyGraph?.unit?.temperatureUnit),
-  ...getDefaultAnnotationsOptions(props.history?.minTemperatureReceivedAt, props.history?.maxTemperatureReceivedAt, props.history?.minTemperature, props.history?.maxTemperature)
-}));
+const chartOptions = computed((previous) => {
+  if (!props.temperatureValues?.length || !props.windChillValues?.length || !props.dewpointValues?.length || !isVisible.value) {
+    return previous ?? {};
+  }
+
+  return {
+    ...getDefaultChartOptions(ChartType.Temperature, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+    ...getDefaultTooltipOptions(props.historyGraph?.unit?.temperatureUnit),
+    ...getDefaultAnnotationsOptions(props.history?.minTemperatureReceivedAt, props.history?.maxTemperatureReceivedAt, props.history?.minTemperature, props.history?.maxTemperature)
+  }
+});
 </script>

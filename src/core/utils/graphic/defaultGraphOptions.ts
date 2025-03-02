@@ -77,7 +77,7 @@ export function getDefaultChartOptions(chartType: ChartType, dateBegin: string |
         },
       },
       zoom: {
-        enabled: true,
+        enabled: false,
         type: 'xy',
         autoScaleYaxis: true,
       },
@@ -88,8 +88,11 @@ export function getDefaultChartOptions(chartType: ChartType, dateBegin: string |
     dataLabels: {
       enabled: false,
     },
+    animations: {
+      enabled: false
+    },
     stroke: {
-      curve: 'smooth',
+      curve: 'straight',
       width: 2,
     },
     markers: {

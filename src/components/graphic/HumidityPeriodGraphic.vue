@@ -37,7 +37,7 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed((previous) => {
-  if (!props.humidityValues || !isVisible.value) {
+  if (!props.humidityValues?.length || !isVisible.value) {
     return previous ?? [];
   }
 
@@ -47,9 +47,15 @@ const chartDatas = computed((previous) => {
   }];
 });
 
-const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.Humidity, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
-  ...getDefaultTooltipOptions(props.historyGraph?.unit?.humidityUnit),
-  ...getDefaultAnnotationsOptions(props.history?.minHumidityReceivedAt, props.history?.maxHumidityReceivedAt, props.history?.minHumidity, props.history?.maxHumidity)
-}));
+const chartOptions = computed((previous) => {
+  if (!props.humidityValues?.length || !isVisible.value) {
+    return previous ?? {};
+  }
+
+  return {
+    ...getDefaultChartOptions(ChartType.Humidity, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+    ...getDefaultTooltipOptions(props.historyGraph?.unit?.humidityUnit),
+    ...getDefaultAnnotationsOptions(props.history?.minHumidityReceivedAt, props.history?.maxHumidityReceivedAt, props.history?.minHumidity, props.history?.maxHumidity)
+  }
+});
 </script>

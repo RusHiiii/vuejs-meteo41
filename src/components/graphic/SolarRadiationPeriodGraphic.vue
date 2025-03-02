@@ -37,7 +37,7 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed((previous) => {
-  if (!props.solarRadiationValues || !isVisible.value) {
+  if (!props.solarRadiationValues?.length || !isVisible.value) {
     return previous ?? [];
   }
 
@@ -47,9 +47,15 @@ const chartDatas = computed((previous) => {
   }];
 });
 
-const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.SolarRadiation, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
-  ...getDefaultTooltipOptions(props.historyGraph?.unit?.solarRadiationUnit),
-  ...getDefaultAnnotationsOptions(undefined, props.history?.maxSolarRadiationReceivedAt, undefined, props.history?.maxSolarRadiation)
-}));
+const chartOptions = computed((previous) => {
+  if (!props.solarRadiationValues?.length || !isVisible.value) {
+    return previous ?? {};
+  }
+
+  return {
+    ...getDefaultChartOptions(ChartType.SolarRadiation, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+    ...getDefaultTooltipOptions(props.historyGraph?.unit?.solarRadiationUnit),
+    ...getDefaultAnnotationsOptions(undefined, props.history?.maxSolarRadiationReceivedAt, undefined, props.history?.maxSolarRadiation)
+  }
+});
 </script>

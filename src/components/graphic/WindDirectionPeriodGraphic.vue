@@ -37,7 +37,7 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed((previous) => {
-  if (!props.windDirectionValues || !isVisible.value) {
+  if (!props.windDirectionValues?.length || !isVisible.value) {
     return previous ?? [];
   }
 
@@ -50,8 +50,14 @@ const chartDatas = computed((previous) => {
   ]
 });
 
-const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.WindDirection, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
-  ...getDefaultTooltipOptions(props.historyGraph?.unit?.windDirUnit)
-}));
+const chartOptions = computed((previous) => {
+  if (!props.windDirectionValues?.length || !isVisible.value) {
+    return previous ?? [];
+  }
+
+  return {
+    ...getDefaultChartOptions(ChartType.WindDirection, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+    ...getDefaultTooltipOptions(props.historyGraph?.unit?.windDirUnit)
+  }
+});
 </script>

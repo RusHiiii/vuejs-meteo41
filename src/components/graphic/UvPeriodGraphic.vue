@@ -36,7 +36,7 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed((previous) => {
-  if (!props.uvValues || !isVisible.value) {
+  if (!props.uvValues?.length || !isVisible.value) {
     return previous ?? [];
   }
 
@@ -46,8 +46,14 @@ const chartDatas = computed((previous) => {
   }];
 });
 
-const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.UV, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
-  ...getDefaultAnnotationsOptions(undefined, props.history?.maxUvReceivedAt, undefined, props.history?.maxUv)
-}));
+const chartOptions = computed((previous) => {
+  if (!props.uvValues?.length || !isVisible.value) {
+    return previous ?? [];
+  }
+
+  return {
+    ...getDefaultChartOptions(ChartType.UV, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+    ...getDefaultAnnotationsOptions(undefined, props.history?.maxUvReceivedAt, undefined, props.history?.maxUv)
+  }
+});
 </script>

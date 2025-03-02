@@ -37,7 +37,7 @@ const { isActive } = useIntersectionObserver(
 )
 
 const chartDatas = computed((previous) => {
-  if (!props.soilTemperatureValues || !isVisible.value) {
+  if (!props.soilTemperatureValues?.length || !isVisible.value) {
     return previous ?? [];
   }
 
@@ -47,9 +47,15 @@ const chartDatas = computed((previous) => {
   }];
 });
 
-const chartOptions = computed(() => ({
-  ...getDefaultChartOptions(ChartType.SoilTemperature, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
-  ...getDefaultTooltipOptions(props.historyGraph?.unit?.temperatureUnit),
-  ...getDefaultAnnotationsOptions(props.history?.minSoilTemperatureReceivedAt, props.history?.maxSoilTemperatureReceivedAt, props.history?.minSoilTemperature, props.history?.maxSoilTemperature)
-}));
+const chartOptions = computed((previous) => {
+  if (!props.soilTemperatureValues?.length || !isVisible.value) {
+    return previous ?? {};
+  }
+
+  return {
+    ...getDefaultChartOptions(ChartType.SoilTemperature, props.historyGraph?.dateBegin, props.historyGraph?.dateEnd),
+    ...getDefaultTooltipOptions(props.historyGraph?.unit?.temperatureUnit),
+    ...getDefaultAnnotationsOptions(props.history?.minSoilTemperatureReceivedAt, props.history?.maxSoilTemperatureReceivedAt, props.history?.minSoilTemperature, props.history?.maxSoilTemperature)
+  }
+});
 </script>
