@@ -113,6 +113,13 @@
               :aqiValues="formatedGraphicData?.aqi"
               :aqiAvgValues="formatedGraphicData?.aqiAvg"
             />
+
+            <WindPeriodGraphic
+              :historyGraph="weatherDataGraphHistory"
+              :history="weatherDataHistory"
+              :windSpeedValues="formatedGraphicData?.windSpeed"
+              :windGustValues="formatedGraphicData?.windGust"
+            />
           </div>
         </div>
       </div>
@@ -138,6 +145,7 @@ import type {WeatherGraphData} from "@/core/types/WeatherData.tsx";
 import RainPeriodGraphic from "@/components/graphic/RainPeriodGraphic.vue";
 import PMPeriodGraphic from "@/components/graphic/PMPeriodGraphic.vue";
 import {useWeatherStation} from "@/hooks/weatherStationHook.ts";
+import WindPeriodGraphic from "@/components/graphic/WindPeriodGraphic.vue";
 
 const AVAILABLE_PERIOD_MAP: Record<string, {title: string, text: string}> = {
   [AVAILABLE_PERIOD.DAILY]: {
@@ -184,7 +192,9 @@ const formatedGraphicData = computed((previous) => {
     aqi: [],
     aqiAvg: [],
     pm25: [],
-    rainRate: []
+    rainRate: [],
+    windGust: [],
+    windSpeed: [],
   };
 
   if (!weatherDataGraphHistory.value) return formatedGraphicData;
@@ -201,6 +211,8 @@ const formatedGraphicData = computed((previous) => {
     formatedGraphicData.windchill.push([observedAt, data.windChill]);
     formatedGraphicData.rain.push([observedAt, data.rainDaily]);
     formatedGraphicData.rainRate.push([observedAt, data.rainRate]);
+    formatedGraphicData.windGust.push([observedAt, data.windGust]);
+    formatedGraphicData.windSpeed.push([observedAt, data.windSpeed]);
 
     if (data.leafWetness != null) formatedGraphicData.leafWetness.push([observedAt, data.leafWetness]);
     if (data.soilTemperature != null) formatedGraphicData.soilTemperature.push([observedAt, data.soilTemperature]);

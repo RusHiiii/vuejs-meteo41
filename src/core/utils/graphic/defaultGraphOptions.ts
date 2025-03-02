@@ -38,6 +38,10 @@ const chartOptions = {
   [ChartType.SolarRadiation]: {
     text: 'Radiation solaire',
     colors: ['#e7bf22'],
+  },
+  [ChartType.Wind]: {
+    text: 'Vent',
+    colors: ['#dec137', '#09a8e6'],
   }
 }
 
