@@ -8,5 +8,6 @@ export enum ChartType {
   Pressure = 'Pressure',
   Rain = 'Rain',
   SolarRadiation = 'solarRadiation',
-  Wind = 'wind'
+  Wind = 'wind',
+  WindDirection = 'windDirection'
 }

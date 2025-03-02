@@ -42,6 +42,22 @@ const chartOptions = {
   [ChartType.Wind]: {
     text: 'Vent',
     colors: ['#dec137', '#09a8e6'],
+  },
+  [ChartType.WindDirection]: {
+    text: 'Direction du vent',
+    colors: ['#e7bf22'],
+    markers: {
+      size: 2,
+      strokeWidth: 1,
+      hover: {
+        sizeOffset: 2
+      }
+    },
+    yaxis: {
+      min: 0,
+      max: 360,
+      tickAmount: 4,
+    },
   }
 }
 
@@ -76,6 +92,9 @@ export function getDefaultChartOptions(chartType: ChartType, dateBegin: string |
       curve: 'smooth',
       width: 2,
     },
+    markers: {
+      ...chartOptions[chartType]?.markers,
+    },
     title: {
       text: chartOptions[chartType].text,
       align: 'left',
@@ -95,7 +114,8 @@ export function getDefaultChartOptions(chartType: ChartType, dateBegin: string |
       showForSingleSeries: true,
     },
     yaxis: {
-      forceNiceScale: true
+      forceNiceScale: true,
+      ...chartOptions[chartType]?.yaxis
     }
   }
 }
