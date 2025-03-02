@@ -60,7 +60,7 @@ const chartDatas = computed((previous) => {
 
 const chartOptions = computed((previous) => {
   if (!props.pm25Values?.length || !props.aqiValues?.length || !props.aqiAvgValues?.length || !isVisible.value) {
-    return previous ?? {};
+    return previous ?? [];
   }
 
   return {

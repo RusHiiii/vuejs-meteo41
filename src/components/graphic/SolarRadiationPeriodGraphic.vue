@@ -49,7 +49,7 @@ const chartDatas = computed((previous) => {
 
 const chartOptions = computed((previous) => {
   if (!props.solarRadiationValues?.length || !isVisible.value) {
-    return previous ?? {};
+    return previous ?? [];
   }
 
   return {

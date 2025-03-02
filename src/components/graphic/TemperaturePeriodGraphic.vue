@@ -60,7 +60,7 @@ const chartDatas = computed((previous) => {
 
 const chartOptions = computed((previous) => {
   if (!props.temperatureValues?.length || !props.windChillValues?.length || !props.dewpointValues?.length || !isVisible.value) {
-    return previous ?? {};
+    return previous ?? [];
   }
 
   return {

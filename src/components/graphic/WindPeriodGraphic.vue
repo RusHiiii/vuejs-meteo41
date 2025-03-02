@@ -58,7 +58,7 @@ const chartDatas = computed((previous) => {
 
 const chartOptions = computed((previous) => {
   if (!props.windSpeedValues?.length || !props.windGustValues?.length || !isVisible.value) {
-    return previous ?? {};
+    return previous ?? [];
   }
 
   return {
